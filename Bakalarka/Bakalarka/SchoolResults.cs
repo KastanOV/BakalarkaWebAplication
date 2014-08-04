@@ -16,7 +16,7 @@ namespace Bakalarka
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string Score { get; set; }
+        public decimal Score { get; set; }
     
         public virtual SubjectSubCategory SubjectSubCategory { get; set; }
         public virtual Student Student { get; set; }

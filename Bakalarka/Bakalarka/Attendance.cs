@@ -15,7 +15,9 @@ namespace Bakalarka
     public partial class Attendance
     {
         public int Id { get; set; }
-        public string StudentMissingDateTime { get; set; }
+        public System.DateTime MissingStart { get; set; }
+        public System.DateTime MissingEnd { get; set; }
+        public bool Excused { get; set; }
     
         public virtual Student Student { get; set; }
     }

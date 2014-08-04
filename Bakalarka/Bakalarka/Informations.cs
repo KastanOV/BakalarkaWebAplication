@@ -12,17 +12,16 @@ namespace Bakalarka
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Informations
     {
-        public User()
-        {
-            this.SchoolYear = new HashSet<SchoolYear>();
-        }
+        public int Id { get; set; }
+        public string InfoForStudent { get; set; }
+        public string InfoForParent { get; set; }
+        public string Description { get; set; }
+        public string Info { get; set; }
+        public bool InfoForTeacher { get; set; }
     
-        public string Id { get; set; }
-        public bool UsingEvenOddShedule { get; set; }
-        public string QRcode { get; set; }
-    
-        public virtual ICollection<SchoolYear> SchoolYear { get; set; }
+        public virtual StudyGroup StudyGroup { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

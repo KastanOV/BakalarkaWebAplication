@@ -17,6 +17,7 @@ namespace Bakalarka
         public StudyGroup()
         {
             this.Student = new HashSet<Student>();
+            this.Informations = new HashSet<Informations>();
         }
     
         public int Id { get; set; }
@@ -24,5 +25,6 @@ namespace Bakalarka
     
         public virtual SchoolYear SchoolYear { get; set; }
         public virtual ICollection<Student> Student { get; set; }
+        public virtual ICollection<Informations> Informations { get; set; }
     }
 }

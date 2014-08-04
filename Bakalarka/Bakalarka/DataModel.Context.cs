@@ -37,5 +37,6 @@ namespace Bakalarka
         public virtual DbSet<Attendance> AttendanceSet { get; set; }
         public virtual DbSet<SheduleItem> SheduleItemSet { get; set; }
         public virtual DbSet<SheduleHours> SheduleHoursSet { get; set; }
+        public virtual DbSet<Informations> InformationsSet { get; set; }
     }
 }
