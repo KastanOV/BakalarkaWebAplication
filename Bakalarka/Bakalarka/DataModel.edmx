@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DatabaseModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="UserSet" EntityType="DatabaseModel.User" />
+          <EntitySet Name="SchoolYearSet" EntityType="DatabaseModel.SchoolYear" />
+          <AssociationSet Name="UserSchoolYear" Association="DatabaseModel.UserSchoolYear">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+          </AssociationSet>
+          <EntitySet Name="StudyGroupSet" EntityType="DatabaseModel.StudyGroup" />
+          <AssociationSet Name="SchoolYearStudyGroup" Association="DatabaseModel.SchoolYearStudyGroup">
+            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="StudyGroup" EntitySet="StudyGroupSet" />
+          </AssociationSet>
+          <EntitySet Name="StudentSet" EntityType="DatabaseModel.Student" />
+          <AssociationSet Name="StudyGroupStudent" Association="DatabaseModel.StudyGroupStudent">
+            <End Role="StudyGroup" EntitySet="StudyGroupSet" />
+            <End Role="Student" EntitySet="StudentSet" />
+          </AssociationSet>
+          <EntitySet Name="StudySubjectSet" EntityType="DatabaseModel.StudySubject" />
+          <EntitySet Name="SubjectSubCategorySet" EntityType="DatabaseModel.SubjectSubCategory" />
+          <AssociationSet Name="SchoolYearStudySubject" Association="DatabaseModel.SchoolYearStudySubject">
+            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="StudySubject" EntitySet="StudySubjectSet" />
+          </AssociationSet>
+          <AssociationSet Name="StudySubjectSubjectSubCategory" Association="DatabaseModel.StudySubjectSubjectSubCategory">
+            <End Role="StudySubject" EntitySet="StudySubjectSet" />
+            <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
+          </AssociationSet>
+          <EntitySet Name="SchoolResultsSet" EntityType="DatabaseModel.SchoolResults" />
+          <AssociationSet Name="SubjectSubCategorySchoolResults" Association="DatabaseModel.SubjectSubCategorySchoolResults">
+            <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
+            <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+          </AssociationSet>
+          <AssociationSet Name="StudentSchoolResults" Association="DatabaseModel.StudentSchoolResults">
+            <End Role="Student" EntitySet="StudentSet" />
+            <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+          </AssociationSet>
+          <EntitySet Name="StudentsNotesSet" EntityType="DatabaseModel.StudentsNotes" />
+          <AssociationSet Name="SubjectSubCategoryStudentsNotes" Association="DatabaseModel.SubjectSubCategoryStudentsNotes">
+            <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
+            <End Role="StudentsNotes" EntitySet="StudentsNotesSet" />
+          </AssociationSet>
+          <AssociationSet Name="StudentStudentsNotes" Association="DatabaseModel.StudentStudentsNotes">
+            <End Role="Student" EntitySet="StudentSet" />
+            <End Role="StudentsNotes" EntitySet="StudentsNotesSet" />
+          </AssociationSet>
+          <EntitySet Name="SchoolSheduleSet" EntityType="DatabaseModel.SchoolShedule" />
+          <AssociationSet Name="SchoolYearSchoolShedule" Association="DatabaseModel.SchoolYearSchoolShedule">
+            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+          </AssociationSet>
+          <AssociationSet Name="SchoolSheduleSheduleItem" Association="DatabaseModel.SchoolSheduleSheduleItem">
+            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+            <End Role="SheduleItem" EntitySet="SheduleItemSet" />
+          </AssociationSet>
+          <EntitySet Name="AttendanceSet" EntityType="DatabaseModel.Attendance" />
+          <AssociationSet Name="StudentAttendance" Association="DatabaseModel.StudentAttendance">
+            <End Role="Student" EntitySet="StudentSet" />
+            <End Role="Attendance" EntitySet="AttendanceSet" />
+          </AssociationSet>
+          <EntitySet Name="SheduleItemSet" EntityType="DatabaseModel.SheduleItem" />
+          <AssociationSet Name="SheduleItemSubjectSubCategory" Association="DatabaseModel.SheduleItemSubjectSubCategory">
+            <End Role="SheduleItem" EntitySet="SheduleItemSet" />
+            <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
+          </AssociationSet>
+          <EntitySet Name="SheduleHoursSet" EntityType="DatabaseModel.SheduleHours" />
+          <AssociationSet Name="SchoolSheduleSheduleHours" Association="DatabaseModel.SchoolSheduleSheduleHours">
+            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+            <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
+          </AssociationSet>
+          <AssociationSet Name="SheduleItemSheduleHours" Association="DatabaseModel.SheduleItemSheduleHours">
+            <End Role="SheduleItem" EntitySet="SheduleItemSet" />
+            <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" MaxLength="128" />
+          <NavigationProperty Name="SchoolYear" Relationship="DatabaseModel.UserSchoolYear" FromRole="User" ToRole="SchoolYear" />
+          <Property Name="UsingEvenOddShedule" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SchoolYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.UserSchoolYear" FromRole="SchoolYear" ToRole="User" />
+          <NavigationProperty Name="StudyGroup" Relationship="DatabaseModel.SchoolYearStudyGroup" FromRole="SchoolYear" ToRole="StudyGroup" />
+          <NavigationProperty Name="StudySubject" Relationship="DatabaseModel.SchoolYearStudySubject" FromRole="SchoolYear" ToRole="StudySubject" />
+          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolYearSchoolShedule" FromRole="SchoolYear" ToRole="SchoolShedule" />
+        </EntityType>
+        <Association Name="UserSchoolYear">
+          <End Type="DatabaseModel.User" Role="User" Multiplicity="1" />
+          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StudyGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="20" />
+          <NavigationProperty Name="SchoolYear" Relationship="DatabaseModel.SchoolYearStudyGroup" FromRole="StudyGroup" ToRole="SchoolYear" />
+          <NavigationProperty Name="Student" Relationship="DatabaseModel.StudyGroupStudent" FromRole="StudyGroup" ToRole="Student" />
+        </EntityType>
+        <Association Name="SchoolYearStudyGroup">
+          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.StudyGroup" Role="StudyGroup" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="StudyGroup" Relationship="DatabaseModel.StudyGroupStudent" FromRole="Student" ToRole="StudyGroup" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="SchoolResults" Relationship="DatabaseModel.StudentSchoolResults" FromRole="Student" ToRole="SchoolResults" />
+          <NavigationProperty Name="StudentsNotes" Relationship="DatabaseModel.StudentStudentsNotes" FromRole="Student" ToRole="StudentsNotes" />
+          <NavigationProperty Name="Attendance" Relationship="DatabaseModel.StudentAttendance" FromRole="Student" ToRole="Attendance" />
+        </EntityType>
+        <Association Name="StudyGroupStudent">
+          <End Type="DatabaseModel.StudyGroup" Role="StudyGroup" Multiplicity="1" />
+          <End Type="DatabaseModel.Student" Role="Student" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StudySubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="SchoolYear" Relationship="DatabaseModel.SchoolYearStudySubject" FromRole="StudySubject" ToRole="SchoolYear" />
+          <NavigationProperty Name="SubjectSubCategory" Relationship="DatabaseModel.StudySubjectSubjectSubCategory" FromRole="StudySubject" ToRole="SubjectSubCategory" />
+        </EntityType>
+        <EntityType Name="SubjectSubCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudySubject" Relationship="DatabaseModel.StudySubjectSubjectSubCategory" FromRole="SubjectSubCategory" ToRole="StudySubject" />
+          <NavigationProperty Name="SchoolResults" Relationship="DatabaseModel.SubjectSubCategorySchoolResults" FromRole="SubjectSubCategory" ToRole="SchoolResults" />
+          <NavigationProperty Name="StudentsNotes" Relationship="DatabaseModel.SubjectSubCategoryStudentsNotes" FromRole="SubjectSubCategory" ToRole="StudentsNotes" />
+          <NavigationProperty Name="SheduleItem" Relationship="DatabaseModel.SheduleItemSubjectSubCategory" FromRole="SubjectSubCategory" ToRole="SheduleItem" />
+        </EntityType>
+        <Association Name="SchoolYearStudySubject">
+          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.StudySubject" Role="StudySubject" Multiplicity="*" />
+        </Association>
+        <Association Name="StudySubjectSubjectSubCategory">
+          <End Type="DatabaseModel.StudySubject" Role="StudySubject" Multiplicity="1" />
+          <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SchoolResults">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SubjectSubCategory" Relationship="DatabaseModel.SubjectSubCategorySchoolResults" FromRole="SchoolResults" ToRole="SubjectSubCategory" />
+          <NavigationProperty Name="Student" Relationship="DatabaseModel.StudentSchoolResults" FromRole="SchoolResults" ToRole="Student" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Score" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="SubjectSubCategorySchoolResults">
+          <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="1" />
+          <End Type="DatabaseModel.SchoolResults" Role="SchoolResults" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentSchoolResults">
+          <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DatabaseModel.SchoolResults" Role="SchoolResults" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StudentsNotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Note" Type="String" Nullable="false" />
+          <NavigationProperty Name="SubjectSubCategory" Relationship="DatabaseModel.SubjectSubCategoryStudentsNotes" FromRole="StudentsNotes" ToRole="SubjectSubCategory" />
+          <NavigationProperty Name="Student" Relationship="DatabaseModel.StudentStudentsNotes" FromRole="StudentsNotes" ToRole="Student" />
+        </EntityType>
+        <Association Name="SubjectSubCategoryStudentsNotes">
+          <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="1" />
+          <End Type="DatabaseModel.StudentsNotes" Role="StudentsNotes" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentStudentsNotes">
+          <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DatabaseModel.StudentsNotes" Role="StudentsNotes" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SchoolShedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Period" Type="String" Nullable="true" MaxLength="1" />
+          <Property Name="EvenWeek" Type="Boolean" Nullable="true" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="SchoolYear" Relationship="DatabaseModel.SchoolYearSchoolShedule" FromRole="SchoolShedule" ToRole="SchoolYear" />
+          <NavigationProperty Name="SheduleItem" Relationship="DatabaseModel.SchoolSheduleSheduleItem" FromRole="SchoolShedule" ToRole="SheduleItem" />
+          <NavigationProperty Name="SheduleHours" Relationship="DatabaseModel.SchoolSheduleSheduleHours" FromRole="SchoolShedule" ToRole="SheduleHours" />
+        </EntityType>
+        <EntityType Name="SheduleItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BeginTime" Type="Time" Nullable="true" />
+          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolSheduleSheduleItem" FromRole="SheduleItem" ToRole="SchoolShedule" />
+          <NavigationProperty Name="SubjectSubCategory" Relationship="DatabaseModel.SheduleItemSubjectSubCategory" FromRole="SheduleItem" ToRole="SubjectSubCategory" />
+          <Property Name="EndTime" Type="Time" Nullable="true" />
+          <NavigationProperty Name="SheduleHours" Relationship="DatabaseModel.SheduleItemSheduleHours" FromRole="SheduleItem" ToRole="SheduleHours" />
+        </EntityType>
+        <Association Name="SchoolYearSchoolShedule">
+          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="*" />
+        </Association>
+        <Association Name="SchoolSheduleSheduleItem">
+          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="1" />
+          <End Type="DatabaseModel.SheduleItem" Role="SheduleItem" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Student" Relationship="DatabaseModel.StudentAttendance" FromRole="Attendance" ToRole="Student" />
+          <Property Name="StudentMissingDateTime" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="StudentAttendance">
+          <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DatabaseModel.Attendance" Role="Attendance" Multiplicity="*" />
+        </Association>
+        <Association Name="SheduleItemSubjectSubCategory">
+          <End Type="DatabaseModel.SheduleItem" Role="SheduleItem" Multiplicity="1" />
+          <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="1" />
+        </Association>
+        <EntityType Name="SheduleHours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolSheduleSheduleHours" FromRole="SheduleHours" ToRole="SchoolShedule" />
+          <Property Name="BeginTime" Type="Time" Nullable="false" />
+          <Property Name="EndTime" Type="Time" Nullable="false" />
+          <NavigationProperty Name="SheduleItem" Relationship="DatabaseModel.SheduleItemSheduleHours" FromRole="SheduleHours" ToRole="SheduleItem" />
+        </EntityType>
+        <Association Name="SchoolSheduleSheduleHours">
+          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="1" />
+          <End Type="DatabaseModel.SheduleHours" Role="SheduleHours" Multiplicity="*" />
+        </Association>
+        <Association Name="SheduleItemSheduleHours">
+          <End Type="DatabaseModel.SheduleItem" Role="SheduleItem" Multiplicity="1" />
+          <End Type="DatabaseModel.SheduleHours" Role="SheduleHours" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities" />
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

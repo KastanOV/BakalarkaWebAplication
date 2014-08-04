@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c83a325fee94fcda3750985bf8e8766" Name="Diagram1" >
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.SchoolYear" Width="1.5" PointX="3" PointY="0.5" />
+        <AssociationConnector Association="DatabaseModel.UserSchoolYear" />
+        <EntityTypeShape EntityType="DatabaseModel.StudyGroup" Width="1.5" PointX="5.125" PointY="0.5" />
+        <AssociationConnector Association="DatabaseModel.SchoolYearStudyGroup" />
+        <EntityTypeShape EntityType="DatabaseModel.Student" Width="1.5" PointX="7.75" PointY="0.5" />
+        <AssociationConnector Association="DatabaseModel.StudyGroupStudent" />
+        <EntityTypeShape EntityType="DatabaseModel.StudySubject" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="DatabaseModel.SubjectSubCategory" Width="1.5" PointX="3" PointY="5.5" />
+        <AssociationConnector Association="DatabaseModel.SchoolYearStudySubject" />
+        <AssociationConnector Association="DatabaseModel.StudySubjectSubjectSubCategory" />
+        <EntityTypeShape EntityType="DatabaseModel.SchoolResults" Width="1.5" PointX="5.25" PointY="3.125" />
+        <AssociationConnector Association="DatabaseModel.SubjectSubCategorySchoolResults" />
+        <AssociationConnector Association="DatabaseModel.StudentSchoolResults" />
+        <EntityTypeShape EntityType="DatabaseModel.StudentsNotes" Width="1.5" PointX="7.75" PointY="4.25" />
+        <AssociationConnector Association="DatabaseModel.SubjectSubCategoryStudentsNotes" />
+        <AssociationConnector Association="DatabaseModel.StudentStudentsNotes" />
+        <EntityTypeShape EntityType="DatabaseModel.SchoolShedule" Width="1.5" PointX="0.5" PointY="2.625" />
+        <EntityTypeShape EntityType="DatabaseModel.SheduleItem" Width="1.5" PointX="1.125" PointY="5.25" />
+        <AssociationConnector Association="DatabaseModel.SchoolYearSchoolShedule" />
+        <AssociationConnector Association="DatabaseModel.SchoolSheduleSheduleItem" />
+        <EntityTypeShape EntityType="DatabaseModel.Attendance" Width="1.5" PointX="10.25" PointY="0.5" />
+        <AssociationConnector Association="DatabaseModel.StudentAttendance" />
+        <AssociationConnector Association="DatabaseModel.SheduleItemSubjectSubCategory" />
+        <EntityTypeShape EntityType="DatabaseModel.SheduleHours" Width="1.5" PointX="0.5" PointY="8.25" />
+        <AssociationConnector Association="DatabaseModel.SchoolSheduleSheduleHours" />
+        <AssociationConnector Association="DatabaseModel.SheduleItemSheduleHours" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
