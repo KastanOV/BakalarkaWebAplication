@@ -12,13 +12,13 @@ namespace Bakalarka
     using System;
     using System.Collections.Generic;
     
-    public partial class SchoolYear
+    public partial class Year
     {
-        public SchoolYear()
+        public Year()
         {
             this.StudyGroup = new HashSet<StudyGroup>();
             this.StudySubject = new HashSet<StudySubject>();
-            this.SchoolShedule = new HashSet<SchoolShedule>();
+            this.Shedule = new HashSet<Shedule>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace Bakalarka
         public virtual User User { get; set; }
         public virtual ICollection<StudyGroup> StudyGroup { get; set; }
         public virtual ICollection<StudySubject> StudySubject { get; set; }
-        public virtual ICollection<SchoolShedule> SchoolShedule { get; set; }
+        public virtual ICollection<Shedule> Shedule { get; set; }
     }
 }

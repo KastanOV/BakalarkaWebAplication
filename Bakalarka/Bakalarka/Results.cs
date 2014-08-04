@@ -12,20 +12,13 @@ namespace Bakalarka
     using System;
     using System.Collections.Generic;
     
-    public partial class SchoolShedule
+    public partial class Results
     {
-        public SchoolShedule()
-        {
-            this.SheduleItem = new HashSet<SheduleItem>();
-            this.SheduleHours = new HashSet<SheduleHours>();
-        }
-    
         public int Id { get; set; }
-        public string Period { get; set; }
-        public Nullable<bool> EvenWeek { get; set; }
+        public string Description { get; set; }
+        public decimal Score { get; set; }
     
-        public virtual SchoolYear SchoolYear { get; set; }
-        public virtual ICollection<SheduleItem> SheduleItem { get; set; }
-        public virtual ICollection<SheduleHours> SheduleHours { get; set; }
+        public virtual SubjectSubCategory SubjectSubCategory { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

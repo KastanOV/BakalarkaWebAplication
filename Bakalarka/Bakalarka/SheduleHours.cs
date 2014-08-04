@@ -18,7 +18,6 @@ namespace Bakalarka
         public System.TimeSpan BeginTime { get; set; }
         public System.TimeSpan EndTime { get; set; }
     
-        public virtual SchoolShedule SchoolShedule { get; set; }
-        public virtual SheduleItem SheduleItem { get; set; }
+        public virtual Shedule Shedule { get; set; }
     }
 }

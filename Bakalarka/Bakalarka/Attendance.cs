@@ -16,7 +16,7 @@ namespace Bakalarka
     {
         public int Id { get; set; }
         public System.DateTime MissingStart { get; set; }
-        public System.DateTime MissingEnd { get; set; }
+        public Nullable<System.DateTime> MissingEnd { get; set; }
         public bool Excused { get; set; }
     
         public virtual Student Student { get; set; }

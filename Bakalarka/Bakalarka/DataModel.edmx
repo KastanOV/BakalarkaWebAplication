@@ -7,24 +7,24 @@
     <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DatabaseModelStoreContainer">
     <EntitySet Name="UserSet" EntityType="DatabaseModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SchoolYearSet" EntityType="DatabaseModel.Store.SchoolYearSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="YearSet" EntityType="DatabaseModel.Store.YearSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudyGroupSet" EntityType="DatabaseModel.Store.StudyGroupSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentSet" EntityType="DatabaseModel.Store.StudentSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudySubjectSet" EntityType="DatabaseModel.Store.StudySubjectSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SubjectSubCategorySet" EntityType="DatabaseModel.Store.SubjectSubCategorySet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SchoolResultsSet" EntityType="DatabaseModel.Store.SchoolResultsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ResultsSet" EntityType="DatabaseModel.Store.ResultsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentsNotesSet" EntityType="DatabaseModel.Store.StudentsNotesSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SchoolSheduleSet" EntityType="DatabaseModel.Store.SchoolSheduleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SheduleSet" EntityType="DatabaseModel.Store.SheduleSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AttendanceSet" EntityType="DatabaseModel.Store.AttendanceSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SheduleItemSet" EntityType="DatabaseModel.Store.SheduleItemSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SheduleHoursSet" EntityType="DatabaseModel.Store.SheduleHoursSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="InformationsSet" EntityType="DatabaseModel.Store.InformationsSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserSchoolYear" Association="DatabaseModel.Store.UserSchoolYear">
       <End Role="User" EntitySet="UserSet" />
-      <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+      <End Role="SchoolYear" EntitySet="YearSet" />
     </AssociationSet>
     <AssociationSet Name="SchoolYearStudyGroup" Association="DatabaseModel.Store.SchoolYearStudyGroup">
-      <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+      <End Role="SchoolYear" EntitySet="YearSet" />
       <End Role="StudyGroup" EntitySet="StudyGroupSet" />
     </AssociationSet>
     <AssociationSet Name="StudyGroupStudent" Association="DatabaseModel.Store.StudyGroupStudent">
@@ -32,7 +32,7 @@
       <End Role="Student" EntitySet="StudentSet" />
     </AssociationSet>
     <AssociationSet Name="SchoolYearStudySubject" Association="DatabaseModel.Store.SchoolYearStudySubject">
-      <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+      <End Role="SchoolYear" EntitySet="YearSet" />
       <End Role="StudySubject" EntitySet="StudySubjectSet" />
     </AssociationSet>
     <AssociationSet Name="StudySubjectSubjectSubCategory" Association="DatabaseModel.Store.StudySubjectSubjectSubCategory">
@@ -41,11 +41,11 @@
     </AssociationSet>
     <AssociationSet Name="SubjectSubCategorySchoolResults" Association="DatabaseModel.Store.SubjectSubCategorySchoolResults">
       <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
-      <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+      <End Role="SchoolResults" EntitySet="ResultsSet" />
     </AssociationSet>
     <AssociationSet Name="StudentSchoolResults" Association="DatabaseModel.Store.StudentSchoolResults">
       <End Role="Student" EntitySet="StudentSet" />
-      <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+      <End Role="SchoolResults" EntitySet="ResultsSet" />
     </AssociationSet>
     <AssociationSet Name="SubjectSubCategoryStudentsNotes" Association="DatabaseModel.Store.SubjectSubCategoryStudentsNotes">
       <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
@@ -56,11 +56,11 @@
       <End Role="StudentsNotes" EntitySet="StudentsNotesSet" />
     </AssociationSet>
     <AssociationSet Name="SchoolYearSchoolShedule" Association="DatabaseModel.Store.SchoolYearSchoolShedule">
-      <End Role="SchoolYear" EntitySet="SchoolYearSet" />
-      <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+      <End Role="SchoolYear" EntitySet="YearSet" />
+      <End Role="SchoolShedule" EntitySet="SheduleSet" />
     </AssociationSet>
     <AssociationSet Name="SchoolSheduleSheduleItem" Association="DatabaseModel.Store.SchoolSheduleSheduleItem">
-      <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+      <End Role="SchoolShedule" EntitySet="SheduleSet" />
       <End Role="SheduleItem" EntitySet="SheduleItemSet" />
     </AssociationSet>
     <AssociationSet Name="StudentAttendance" Association="DatabaseModel.Store.StudentAttendance">
@@ -72,11 +72,7 @@
       <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
     </AssociationSet>
     <AssociationSet Name="SchoolSheduleSheduleHours" Association="DatabaseModel.Store.SchoolSheduleSheduleHours">
-      <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
-      <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
-    </AssociationSet>
-    <AssociationSet Name="SheduleItemSheduleHours" Association="DatabaseModel.Store.SheduleItemSheduleHours">
-      <End Role="SheduleItem" EntitySet="SheduleItemSet" />
+      <End Role="SchoolShedule" EntitySet="SheduleSet" />
       <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
     </AssociationSet>
     <AssociationSet Name="StudyGroupInformations" Association="DatabaseModel.Store.StudyGroupInformations">
@@ -91,13 +87,12 @@
   <EntityType Name="UserSet">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="QRcode" />
     </Key>
     <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="UsingEvenOddShedule" Type="bit" Nullable="false" />
     <Property Name="QRcode" Type="nvarchar" Nullable="false" MaxLength="128" />
   </EntityType>
-  <EntityType Name="SchoolYearSet">
+  <EntityType Name="YearSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -105,7 +100,6 @@
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="ActualYear" Type="bit" Nullable="false" />
     <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="User_QRcode" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="StudyGroupSet">
     <Key>
@@ -144,7 +138,7 @@
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="StudySubject_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="SchoolResultsSet">
+  <EntityType Name="ResultsSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -164,7 +158,7 @@
     <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
     <Property Name="Student_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="SchoolSheduleSet">
+  <EntityType Name="SheduleSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -179,7 +173,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MissingStart" Type="datetime" Nullable="false" />
-    <Property Name="MissingEnd" Type="datetime" Nullable="false" />
+    <Property Name="MissingEnd" Type="datetime" Nullable="true" />
     <Property Name="Excused" Type="bit" Nullable="false" />
     <Property Name="Student_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -190,7 +184,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BeginTime" Type="time" Nullable="true" />
     <Property Name="EndTime" Type="time" Nullable="true" />
-    <Property Name="SchoolShedule_Id" Type="int" Nullable="false" />
+    <Property Name="Shedule_Id" Type="int" Nullable="false" />
     <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SheduleHoursSet">
@@ -200,8 +194,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BeginTime" Type="time" Nullable="false" />
     <Property Name="EndTime" Type="time" Nullable="false" />
-    <Property Name="SchoolShedule_Id" Type="int" Nullable="false" />
-    <Property Name="SheduleItem_Id" Type="int" Nullable="false" />
+    <Property Name="Shedule_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="InformationsSet">
     <Key>
@@ -210,28 +203,25 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="InfoForStudent" Type="nvarchar(max)" Nullable="false" />
     <Property Name="InfoForParent" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="InfoForTeacher" Type="bit" Nullable="false" />
-    <Property Name="StudyGroup_Id" Type="int" Nullable="false" />
-    <Property Name="Student_Id" Type="int" Nullable="false" />
+    <Property Name="StudyGroup_Id" Type="int" Nullable="true" />
+    <Property Name="Student_Id" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="UserSchoolYear">
     <End Role="User" Type="DatabaseModel.Store.UserSet" Multiplicity="1" />
-    <End Role="SchoolYear" Type="DatabaseModel.Store.SchoolYearSet" Multiplicity="*" />
+    <End Role="SchoolYear" Type="DatabaseModel.Store.YearSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />
-        <PropertyRef Name="QRcode" />
       </Principal>
       <Dependent Role="SchoolYear">
         <PropertyRef Name="User_Id" />
-        <PropertyRef Name="User_QRcode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="SchoolYearStudyGroup">
-    <End Role="SchoolYear" Type="DatabaseModel.Store.SchoolYearSet" Multiplicity="1" />
+    <End Role="SchoolYear" Type="DatabaseModel.Store.YearSet" Multiplicity="1" />
     <End Role="StudyGroup" Type="DatabaseModel.Store.StudyGroupSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SchoolYear">
@@ -255,7 +245,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SchoolYearStudySubject">
-    <End Role="SchoolYear" Type="DatabaseModel.Store.SchoolYearSet" Multiplicity="1" />
+    <End Role="SchoolYear" Type="DatabaseModel.Store.YearSet" Multiplicity="1" />
     <End Role="StudySubject" Type="DatabaseModel.Store.StudySubjectSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SchoolYear">
@@ -280,7 +270,7 @@
   </Association>
   <Association Name="SubjectSubCategorySchoolResults">
     <End Role="SubjectSubCategory" Type="DatabaseModel.Store.SubjectSubCategorySet" Multiplicity="1" />
-    <End Role="SchoolResults" Type="DatabaseModel.Store.SchoolResultsSet" Multiplicity="*" />
+    <End Role="SchoolResults" Type="DatabaseModel.Store.ResultsSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubjectSubCategory">
         <PropertyRef Name="Id" />
@@ -292,7 +282,7 @@
   </Association>
   <Association Name="StudentSchoolResults">
     <End Role="Student" Type="DatabaseModel.Store.StudentSet" Multiplicity="1" />
-    <End Role="SchoolResults" Type="DatabaseModel.Store.SchoolResultsSet" Multiplicity="*" />
+    <End Role="SchoolResults" Type="DatabaseModel.Store.ResultsSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="Id" />
@@ -327,8 +317,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SchoolYearSchoolShedule">
-    <End Role="SchoolYear" Type="DatabaseModel.Store.SchoolYearSet" Multiplicity="1" />
-    <End Role="SchoolShedule" Type="DatabaseModel.Store.SchoolSheduleSet" Multiplicity="*" />
+    <End Role="SchoolYear" Type="DatabaseModel.Store.YearSet" Multiplicity="1" />
+    <End Role="SchoolShedule" Type="DatabaseModel.Store.SheduleSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SchoolYear">
         <PropertyRef Name="Id" />
@@ -339,14 +329,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SchoolSheduleSheduleItem">
-    <End Role="SchoolShedule" Type="DatabaseModel.Store.SchoolSheduleSet" Multiplicity="1" />
+    <End Role="SchoolShedule" Type="DatabaseModel.Store.SheduleSet" Multiplicity="1" />
     <End Role="SheduleItem" Type="DatabaseModel.Store.SheduleItemSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SchoolShedule">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SheduleItem">
-        <PropertyRef Name="SchoolShedule_Id" />
+        <PropertyRef Name="Shedule_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -375,31 +365,19 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SchoolSheduleSheduleHours">
-    <End Role="SchoolShedule" Type="DatabaseModel.Store.SchoolSheduleSet" Multiplicity="1" />
+    <End Role="SchoolShedule" Type="DatabaseModel.Store.SheduleSet" Multiplicity="1" />
     <End Role="SheduleHours" Type="DatabaseModel.Store.SheduleHoursSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SchoolShedule">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SheduleHours">
-        <PropertyRef Name="SchoolShedule_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="SheduleItemSheduleHours">
-    <End Role="SheduleItem" Type="DatabaseModel.Store.SheduleItemSet" Multiplicity="1" />
-    <End Role="SheduleHours" Type="DatabaseModel.Store.SheduleHoursSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SheduleItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SheduleHours">
-        <PropertyRef Name="SheduleItem_Id" />
+        <PropertyRef Name="Shedule_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="StudyGroupInformations">
-    <End Role="StudyGroup" Type="DatabaseModel.Store.StudyGroupSet" Multiplicity="1" />
+    <End Role="StudyGroup" Type="DatabaseModel.Store.StudyGroupSet" Multiplicity="0..1" />
     <End Role="Informations" Type="DatabaseModel.Store.InformationsSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StudyGroup">
@@ -411,7 +389,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="StudentInformations">
-    <End Role="Student" Type="DatabaseModel.Store.StudentSet" Multiplicity="1" />
+    <End Role="Student" Type="DatabaseModel.Store.StudentSet" Multiplicity="0..1" />
     <End Role="Informations" Type="DatabaseModel.Store.InformationsSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -428,14 +406,14 @@
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="UserSet" EntityType="DatabaseModel.User" />
-          <EntitySet Name="SchoolYearSet" EntityType="DatabaseModel.SchoolYear" />
+          <EntitySet Name="YearSet" EntityType="DatabaseModel.Year" />
           <AssociationSet Name="UserSchoolYear" Association="DatabaseModel.UserSchoolYear">
             <End Role="User" EntitySet="UserSet" />
-            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="SchoolYear" EntitySet="YearSet" />
           </AssociationSet>
           <EntitySet Name="StudyGroupSet" EntityType="DatabaseModel.StudyGroup" />
           <AssociationSet Name="SchoolYearStudyGroup" Association="DatabaseModel.SchoolYearStudyGroup">
-            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="SchoolYear" EntitySet="YearSet" />
             <End Role="StudyGroup" EntitySet="StudyGroupSet" />
           </AssociationSet>
           <EntitySet Name="StudentSet" EntityType="DatabaseModel.Student" />
@@ -446,21 +424,21 @@
           <EntitySet Name="StudySubjectSet" EntityType="DatabaseModel.StudySubject" />
           <EntitySet Name="SubjectSubCategorySet" EntityType="DatabaseModel.SubjectSubCategory" />
           <AssociationSet Name="SchoolYearStudySubject" Association="DatabaseModel.SchoolYearStudySubject">
-            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
+            <End Role="SchoolYear" EntitySet="YearSet" />
             <End Role="StudySubject" EntitySet="StudySubjectSet" />
           </AssociationSet>
           <AssociationSet Name="StudySubjectSubjectSubCategory" Association="DatabaseModel.StudySubjectSubjectSubCategory">
             <End Role="StudySubject" EntitySet="StudySubjectSet" />
             <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
           </AssociationSet>
-          <EntitySet Name="SchoolResultsSet" EntityType="DatabaseModel.SchoolResults" />
+          <EntitySet Name="ResultsSet" EntityType="DatabaseModel.Results" />
           <AssociationSet Name="SubjectSubCategorySchoolResults" Association="DatabaseModel.SubjectSubCategorySchoolResults">
             <End Role="SubjectSubCategory" EntitySet="SubjectSubCategorySet" />
-            <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+            <End Role="SchoolResults" EntitySet="ResultsSet" />
           </AssociationSet>
           <AssociationSet Name="StudentSchoolResults" Association="DatabaseModel.StudentSchoolResults">
             <End Role="Student" EntitySet="StudentSet" />
-            <End Role="SchoolResults" EntitySet="SchoolResultsSet" />
+            <End Role="SchoolResults" EntitySet="ResultsSet" />
           </AssociationSet>
           <EntitySet Name="StudentsNotesSet" EntityType="DatabaseModel.StudentsNotes" />
           <AssociationSet Name="SubjectSubCategoryStudentsNotes" Association="DatabaseModel.SubjectSubCategoryStudentsNotes">
@@ -471,13 +449,13 @@
             <End Role="Student" EntitySet="StudentSet" />
             <End Role="StudentsNotes" EntitySet="StudentsNotesSet" />
           </AssociationSet>
-          <EntitySet Name="SchoolSheduleSet" EntityType="DatabaseModel.SchoolShedule" />
+          <EntitySet Name="SheduleSet" EntityType="DatabaseModel.Shedule" />
           <AssociationSet Name="SchoolYearSchoolShedule" Association="DatabaseModel.SchoolYearSchoolShedule">
-            <End Role="SchoolYear" EntitySet="SchoolYearSet" />
-            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+            <End Role="SchoolYear" EntitySet="YearSet" />
+            <End Role="SchoolShedule" EntitySet="SheduleSet" />
           </AssociationSet>
           <AssociationSet Name="SchoolSheduleSheduleItem" Association="DatabaseModel.SchoolSheduleSheduleItem">
-            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
+            <End Role="SchoolShedule" EntitySet="SheduleSet" />
             <End Role="SheduleItem" EntitySet="SheduleItemSet" />
           </AssociationSet>
           <EntitySet Name="AttendanceSet" EntityType="DatabaseModel.Attendance" />
@@ -492,11 +470,7 @@
           </AssociationSet>
           <EntitySet Name="SheduleHoursSet" EntityType="DatabaseModel.SheduleHours" />
           <AssociationSet Name="SchoolSheduleSheduleHours" Association="DatabaseModel.SchoolSheduleSheduleHours">
-            <End Role="SchoolShedule" EntitySet="SchoolSheduleSet" />
-            <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
-          </AssociationSet>
-          <AssociationSet Name="SheduleItemSheduleHours" Association="DatabaseModel.SheduleItemSheduleHours">
-            <End Role="SheduleItem" EntitySet="SheduleItemSet" />
+            <End Role="SchoolShedule" EntitySet="SheduleSet" />
             <End Role="SheduleHours" EntitySet="SheduleHoursSet" />
           </AssociationSet>
           <EntitySet Name="InformationsSet" EntityType="DatabaseModel.Informations" />
@@ -505,21 +479,20 @@
             <End Role="Informations" EntitySet="InformationsSet" />
           </AssociationSet>
           <AssociationSet Name="StudentInformations" Association="DatabaseModel.StudentInformations">
-            <End Role="Student" EntitySet="StudentSet" />
-            <End Role="Informations" EntitySet="InformationsSet" />
+            <End EntitySet="StudentSet" Role="Student" />
+            <End EntitySet="InformationsSet" Role="Informations" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="QRcode" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="128" />
           <NavigationProperty Name="SchoolYear" Relationship="DatabaseModel.UserSchoolYear" FromRole="User" ToRole="SchoolYear" />
           <Property Name="UsingEvenOddShedule" Type="Boolean" Nullable="false" />
           <Property Name="QRcode" Type="String" Nullable="false" MaxLength="128" />
         </EntityType>
-        <EntityType Name="SchoolYear">
+        <EntityType Name="Year">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -528,12 +501,12 @@
           <NavigationProperty Name="User" Relationship="DatabaseModel.UserSchoolYear" FromRole="SchoolYear" ToRole="User" />
           <NavigationProperty Name="StudyGroup" Relationship="DatabaseModel.SchoolYearStudyGroup" FromRole="SchoolYear" ToRole="StudyGroup" />
           <NavigationProperty Name="StudySubject" Relationship="DatabaseModel.SchoolYearStudySubject" FromRole="SchoolYear" ToRole="StudySubject" />
-          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolYearSchoolShedule" FromRole="SchoolYear" ToRole="SchoolShedule" />
+          <NavigationProperty Name="Shedule" Relationship="DatabaseModel.SchoolYearSchoolShedule" FromRole="SchoolYear" ToRole="SchoolShedule" />
           <Property Name="ActualYear" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="UserSchoolYear">
           <End Type="DatabaseModel.User" Role="User" Multiplicity="1" />
-          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="*" />
+          <End Type="DatabaseModel.Year" Role="SchoolYear" Multiplicity="*" />
         </Association>
         <EntityType Name="StudyGroup">
           <Key>
@@ -546,7 +519,7 @@
           <NavigationProperty Name="Informations" Relationship="DatabaseModel.StudyGroupInformations" FromRole="StudyGroup" ToRole="Informations" />
         </EntityType>
         <Association Name="SchoolYearStudyGroup">
-          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.Year" Role="SchoolYear" Multiplicity="1" />
           <End Type="DatabaseModel.StudyGroup" Role="StudyGroup" Multiplicity="*" />
         </Association>
         <EntityType Name="Student">
@@ -559,7 +532,7 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="SchoolResults" Relationship="DatabaseModel.StudentSchoolResults" FromRole="Student" ToRole="SchoolResults" />
+          <NavigationProperty Name="Results" Relationship="DatabaseModel.StudentSchoolResults" FromRole="Student" ToRole="SchoolResults" />
           <NavigationProperty Name="StudentsNotes" Relationship="DatabaseModel.StudentStudentsNotes" FromRole="Student" ToRole="StudentsNotes" />
           <NavigationProperty Name="Attendance" Relationship="DatabaseModel.StudentAttendance" FromRole="Student" ToRole="Attendance" />
           <Property Name="QRcodeParent" Type="String" Nullable="false" MaxLength="128" />
@@ -586,19 +559,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" />
           <NavigationProperty Name="StudySubject" Relationship="DatabaseModel.StudySubjectSubjectSubCategory" FromRole="SubjectSubCategory" ToRole="StudySubject" />
-          <NavigationProperty Name="SchoolResults" Relationship="DatabaseModel.SubjectSubCategorySchoolResults" FromRole="SubjectSubCategory" ToRole="SchoolResults" />
+          <NavigationProperty Name="Results" Relationship="DatabaseModel.SubjectSubCategorySchoolResults" FromRole="SubjectSubCategory" ToRole="SchoolResults" />
           <NavigationProperty Name="StudentsNotes" Relationship="DatabaseModel.SubjectSubCategoryStudentsNotes" FromRole="SubjectSubCategory" ToRole="StudentsNotes" />
           <NavigationProperty Name="SheduleItem" Relationship="DatabaseModel.SheduleItemSubjectSubCategory" FromRole="SubjectSubCategory" ToRole="SheduleItem" />
         </EntityType>
         <Association Name="SchoolYearStudySubject">
-          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.Year" Role="SchoolYear" Multiplicity="1" />
           <End Type="DatabaseModel.StudySubject" Role="StudySubject" Multiplicity="*" />
         </Association>
         <Association Name="StudySubjectSubjectSubCategory">
           <End Type="DatabaseModel.StudySubject" Role="StudySubject" Multiplicity="1" />
           <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="*" />
         </Association>
-        <EntityType Name="SchoolResults">
+        <EntityType Name="Results">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -610,11 +583,11 @@
         </EntityType>
         <Association Name="SubjectSubCategorySchoolResults">
           <End Type="DatabaseModel.SubjectSubCategory" Role="SubjectSubCategory" Multiplicity="1" />
-          <End Type="DatabaseModel.SchoolResults" Role="SchoolResults" Multiplicity="*" />
+          <End Type="DatabaseModel.Results" Role="SchoolResults" Multiplicity="*" />
         </Association>
         <Association Name="StudentSchoolResults">
           <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DatabaseModel.SchoolResults" Role="SchoolResults" Multiplicity="*" />
+          <End Type="DatabaseModel.Results" Role="SchoolResults" Multiplicity="*" />
         </Association>
         <EntityType Name="StudentsNotes">
           <Key>
@@ -634,7 +607,7 @@
           <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
           <End Type="DatabaseModel.StudentsNotes" Role="StudentsNotes" Multiplicity="*" />
         </Association>
-        <EntityType Name="SchoolShedule">
+        <EntityType Name="Shedule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -651,17 +624,16 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BeginTime" Type="Time" Nullable="true" />
-          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolSheduleSheduleItem" FromRole="SheduleItem" ToRole="SchoolShedule" />
+          <NavigationProperty Name="Shedule" Relationship="DatabaseModel.SchoolSheduleSheduleItem" FromRole="SheduleItem" ToRole="SchoolShedule" />
           <NavigationProperty Name="SubjectSubCategory" Relationship="DatabaseModel.SheduleItemSubjectSubCategory" FromRole="SheduleItem" ToRole="SubjectSubCategory" />
           <Property Name="EndTime" Type="Time" Nullable="true" />
-          <NavigationProperty Name="SheduleHours" Relationship="DatabaseModel.SheduleItemSheduleHours" FromRole="SheduleItem" ToRole="SheduleHours" />
         </EntityType>
         <Association Name="SchoolYearSchoolShedule">
-          <End Type="DatabaseModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
-          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="*" />
+          <End Type="DatabaseModel.Year" Role="SchoolYear" Multiplicity="1" />
+          <End Type="DatabaseModel.Shedule" Role="SchoolShedule" Multiplicity="*" />
         </Association>
         <Association Name="SchoolSheduleSheduleItem">
-          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="1" />
+          <End Type="DatabaseModel.Shedule" Role="SchoolShedule" Multiplicity="1" />
           <End Type="DatabaseModel.SheduleItem" Role="SheduleItem" Multiplicity="*" />
         </Association>
         <EntityType Name="Attendance">
@@ -671,7 +643,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Student" Relationship="DatabaseModel.StudentAttendance" FromRole="Attendance" ToRole="Student" />
           <Property Name="MissingStart" Type="DateTime" Nullable="false" />
-          <Property Name="MissingEnd" Type="DateTime" Nullable="false" />
+          <Property Name="MissingEnd" Type="DateTime" Nullable="true" />
           <Property Name="Excused" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="StudentAttendance">
@@ -687,18 +659,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="SchoolShedule" Relationship="DatabaseModel.SchoolSheduleSheduleHours" FromRole="SheduleHours" ToRole="SchoolShedule" />
+          <NavigationProperty Name="Shedule" Relationship="DatabaseModel.SchoolSheduleSheduleHours" FromRole="SheduleHours" ToRole="SchoolShedule" />
           <Property Name="BeginTime" Type="Time" Nullable="false" />
           <Property Name="EndTime" Type="Time" Nullable="false" />
-          <NavigationProperty Name="SheduleItem" Relationship="DatabaseModel.SheduleItemSheduleHours" FromRole="SheduleHours" ToRole="SheduleItem" />
         </EntityType>
         <Association Name="SchoolSheduleSheduleHours">
-          <End Type="DatabaseModel.SchoolShedule" Role="SchoolShedule" Multiplicity="1" />
+          <End Type="DatabaseModel.Shedule" Role="SchoolShedule" Multiplicity="1" />
           <End Type="DatabaseModel.SheduleHours" Role="SheduleHours" Multiplicity="*" />
-        </Association>
-        <Association Name="SheduleItemSheduleHours">
-          <End Type="DatabaseModel.SheduleItem" Role="SheduleItem" Multiplicity="1" />
-          <End Type="DatabaseModel.SheduleHours" Role="SheduleHours" Multiplicity="0..1" />
         </Association>
         <EntityType Name="Informations">
           <Key>
@@ -707,19 +674,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InfoForStudent" Type="String" Nullable="false" />
           <Property Name="InfoForParent" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="Info" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Info" Type="String" Nullable="false" MaxLength="Max" />
           <NavigationProperty Name="StudyGroup" Relationship="DatabaseModel.StudyGroupInformations" FromRole="Informations" ToRole="StudyGroup" />
           <NavigationProperty Name="Student" Relationship="DatabaseModel.StudentInformations" FromRole="Informations" ToRole="Student" />
-          <Property Name="InfoForTeacher" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="StudyGroupInformations">
-          <End Type="DatabaseModel.StudyGroup" Role="StudyGroup" Multiplicity="1" />
+          <End Type="DatabaseModel.StudyGroup" Role="StudyGroup" Multiplicity="0..1" />
           <End Type="DatabaseModel.Informations" Role="Informations" Multiplicity="*" />
         </Association>
         <Association Name="StudentInformations">
-          <End Type="DatabaseModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DatabaseModel.Informations" Role="Informations" Multiplicity="*" />
+          <End Type="DatabaseModel.Student" Multiplicity="0..1" Role="Student" />
+          <End Type="DatabaseModel.Informations" Multiplicity="*" Role="Informations" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -731,14 +697,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.User)">
         <MappingFragment StoreEntitySet="UserSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="QRcode" ColumnName="QRcode" />
           <ScalarProperty Name="UsingEvenOddShedule" ColumnName="UsingEvenOddShedule" />
+          <ScalarProperty Name="QRcode" ColumnName="QRcode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SchoolYearSet">
-      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.SchoolYear)">
-        <MappingFragment StoreEntitySet="SchoolYearSet">
+    <EntitySetMapping Name="YearSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Year)">
+        <MappingFragment StoreEntitySet="YearSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ActualYear" ColumnName="ActualYear" />
@@ -782,9 +748,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SchoolResultsSet">
-      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.SchoolResults)">
-        <MappingFragment StoreEntitySet="SchoolResultsSet">
+    <EntitySetMapping Name="ResultsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Results)">
+        <MappingFragment StoreEntitySet="ResultsSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Score" ColumnName="Score" />
@@ -800,9 +766,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SchoolSheduleSet">
-      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.SchoolShedule)">
-        <MappingFragment StoreEntitySet="SchoolSheduleSet">
+    <EntitySetMapping Name="SheduleSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Shedule)">
+        <MappingFragment StoreEntitySet="SheduleSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Period" ColumnName="Period" />
           <ScalarProperty Name="EvenWeek" ColumnName="EvenWeek" />
@@ -845,14 +811,12 @@
           <ScalarProperty Name="InfoForParent" ColumnName="InfoForParent" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="InfoForTeacher" ColumnName="InfoForTeacher" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="UserSchoolYear" TypeName="DatabaseModel.UserSchoolYear" StoreEntitySet="SchoolYearSet">
+    <AssociationSetMapping Name="UserSchoolYear" TypeName="DatabaseModel.UserSchoolYear" StoreEntitySet="YearSet">
       <EndProperty Name="User">
         <ScalarProperty Name="Id" ColumnName="User_Id" />
-        <ScalarProperty Name="QRcode" ColumnName="User_QRcode" />
       </EndProperty>
       <EndProperty Name="SchoolYear">
         <ScalarProperty Name="Id" ColumnName="Id" />
@@ -890,7 +854,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="SubjectSubCategorySchoolResults" TypeName="DatabaseModel.SubjectSubCategorySchoolResults" StoreEntitySet="SchoolResultsSet">
+    <AssociationSetMapping Name="SubjectSubCategorySchoolResults" TypeName="DatabaseModel.SubjectSubCategorySchoolResults" StoreEntitySet="ResultsSet">
       <EndProperty Name="SubjectSubCategory">
         <ScalarProperty Name="Id" ColumnName="SubjectSubCategory_Id" />
       </EndProperty>
@@ -898,7 +862,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="StudentSchoolResults" TypeName="DatabaseModel.StudentSchoolResults" StoreEntitySet="SchoolResultsSet">
+    <AssociationSetMapping Name="StudentSchoolResults" TypeName="DatabaseModel.StudentSchoolResults" StoreEntitySet="ResultsSet">
       <EndProperty Name="Student">
         <ScalarProperty Name="Id" ColumnName="Student_Id" />
       </EndProperty>
@@ -922,7 +886,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="SchoolYearSchoolShedule" TypeName="DatabaseModel.SchoolYearSchoolShedule" StoreEntitySet="SchoolSheduleSet">
+    <AssociationSetMapping Name="SchoolYearSchoolShedule" TypeName="DatabaseModel.SchoolYearSchoolShedule" StoreEntitySet="SheduleSet">
       <EndProperty Name="SchoolYear">
         <ScalarProperty Name="Id" ColumnName="SchoolYear_Id" />
       </EndProperty>
@@ -932,7 +896,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SchoolSheduleSheduleItem" TypeName="DatabaseModel.SchoolSheduleSheduleItem" StoreEntitySet="SheduleItemSet">
       <EndProperty Name="SchoolShedule">
-        <ScalarProperty Name="Id" ColumnName="SchoolShedule_Id" />
+        <ScalarProperty Name="Id" ColumnName="Shedule_Id" />
       </EndProperty>
       <EndProperty Name="SheduleItem">
         <ScalarProperty Name="Id" ColumnName="Id" />
@@ -956,15 +920,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SchoolSheduleSheduleHours" TypeName="DatabaseModel.SchoolSheduleSheduleHours" StoreEntitySet="SheduleHoursSet">
       <EndProperty Name="SchoolShedule">
-        <ScalarProperty Name="Id" ColumnName="SchoolShedule_Id" />
-      </EndProperty>
-      <EndProperty Name="SheduleHours">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="SheduleItemSheduleHours" TypeName="DatabaseModel.SheduleItemSheduleHours" StoreEntitySet="SheduleHoursSet">
-      <EndProperty Name="SheduleItem">
-        <ScalarProperty Name="Id" ColumnName="SheduleItem_Id" />
+        <ScalarProperty Name="Id" ColumnName="Shedule_Id" />
       </EndProperty>
       <EndProperty Name="SheduleHours">
         <ScalarProperty Name="Id" ColumnName="Id" />
@@ -977,6 +933,7 @@
       <EndProperty Name="Informations">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="StudyGroup_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="StudentInformations" TypeName="DatabaseModel.StudentInformations" StoreEntitySet="InformationsSet">
       <EndProperty Name="Student">
@@ -985,6 +942,7 @@
       <EndProperty Name="Informations">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Student_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

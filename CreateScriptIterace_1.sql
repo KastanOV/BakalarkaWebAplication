@@ -1,9 +1,9 @@
-
+﻿
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/04/2014 20:05:30
--- Generated from EDMX file: C:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\Bakalarka\Bakalarka\DataModel.edmx
+-- Date Created: 08/04/2014 23:25:22
+-- Generated from EDMX file: C:\Users\Topr\Documents\GitHub\BakalarkaWebAplication\Bakalarka\Bakalarka\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,101 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_UserSchoolYear]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[YearSet] DROP CONSTRAINT [FK_UserSchoolYear];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolYearStudyGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudyGroupSet] DROP CONSTRAINT [FK_SchoolYearStudyGroup];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudyGroupStudent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_StudyGroupStudent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolYearStudySubject]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudySubjectSet] DROP CONSTRAINT [FK_SchoolYearStudySubject];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudySubjectSubjectSubCategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SubjectSubCategorySet] DROP CONSTRAINT [FK_StudySubjectSubjectSubCategory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubjectSubCategorySchoolResults]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ResultsSet] DROP CONSTRAINT [FK_SubjectSubCategorySchoolResults];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentSchoolResults]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ResultsSet] DROP CONSTRAINT [FK_StudentSchoolResults];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubjectSubCategoryStudentsNotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentsNotesSet] DROP CONSTRAINT [FK_SubjectSubCategoryStudentsNotes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentStudentsNotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentsNotesSet] DROP CONSTRAINT [FK_StudentStudentsNotes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolYearSchoolShedule]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SheduleSet] DROP CONSTRAINT [FK_SchoolYearSchoolShedule];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolSheduleSheduleItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SheduleItemSet] DROP CONSTRAINT [FK_SchoolSheduleSheduleItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentAttendance]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AttendanceSet] DROP CONSTRAINT [FK_StudentAttendance];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SheduleItemSubjectSubCategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SheduleItemSet] DROP CONSTRAINT [FK_SheduleItemSubjectSubCategory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolSheduleSheduleHours]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SheduleHoursSet] DROP CONSTRAINT [FK_SchoolSheduleSheduleHours];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SheduleItemSheduleHours]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SheduleItemSet] DROP CONSTRAINT [FK_SheduleItemSheduleHours];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudyGroupInformations]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InformationsSet] DROP CONSTRAINT [FK_StudyGroupInformations];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentInformations]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InformationsSet] DROP CONSTRAINT [FK_StudentInformations];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[UserSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserSet];
+GO
+IF OBJECT_ID(N'[dbo].[YearSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[YearSet];
+GO
+IF OBJECT_ID(N'[dbo].[StudyGroupSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudyGroupSet];
+GO
+IF OBJECT_ID(N'[dbo].[StudentSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudentSet];
+GO
+IF OBJECT_ID(N'[dbo].[StudySubjectSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudySubjectSet];
+GO
+IF OBJECT_ID(N'[dbo].[SubjectSubCategorySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SubjectSubCategorySet];
+GO
+IF OBJECT_ID(N'[dbo].[ResultsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ResultsSet];
+GO
+IF OBJECT_ID(N'[dbo].[StudentsNotesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudentsNotesSet];
+GO
+IF OBJECT_ID(N'[dbo].[SheduleSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SheduleSet];
+GO
+IF OBJECT_ID(N'[dbo].[AttendanceSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AttendanceSet];
+GO
+IF OBJECT_ID(N'[dbo].[SheduleItemSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SheduleItemSet];
+GO
+IF OBJECT_ID(N'[dbo].[SheduleHoursSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SheduleHoursSet];
+GO
+IF OBJECT_ID(N'[dbo].[InformationsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InformationsSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -35,13 +125,12 @@ CREATE TABLE [dbo].[UserSet] (
 );
 GO
 
--- Creating table 'SchoolYearSet'
-CREATE TABLE [dbo].[SchoolYearSet] (
+-- Creating table 'YearSet'
+CREATE TABLE [dbo].[YearSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(20)  NOT NULL,
     [ActualYear] bit  NOT NULL,
-    [User_Id] nvarchar(128)  NOT NULL,
-    [User_QRcode] nvarchar(128)  NOT NULL
+    [User_Id] nvarchar(128)  NOT NULL
 );
 GO
 
@@ -82,8 +171,8 @@ CREATE TABLE [dbo].[SubjectSubCategorySet] (
 );
 GO
 
--- Creating table 'SchoolResultsSet'
-CREATE TABLE [dbo].[SchoolResultsSet] (
+-- Creating table 'ResultsSet'
+CREATE TABLE [dbo].[ResultsSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Description] nvarchar(50)  NOT NULL,
     [Score] decimal(2,1)  NOT NULL,
@@ -102,8 +191,8 @@ CREATE TABLE [dbo].[StudentsNotesSet] (
 );
 GO
 
--- Creating table 'SchoolSheduleSet'
-CREATE TABLE [dbo].[SchoolSheduleSet] (
+-- Creating table 'SheduleSet'
+CREATE TABLE [dbo].[SheduleSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Period] nvarchar(1)  NULL,
     [EvenWeek] bit  NULL,
@@ -115,7 +204,7 @@ GO
 CREATE TABLE [dbo].[AttendanceSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [MissingStart] datetime  NOT NULL,
-    [MissingEnd] datetime  NOT NULL,
+    [MissingEnd] datetime  NULL,
     [Excused] bit  NOT NULL,
     [Student_Id] int  NOT NULL
 );
@@ -126,7 +215,7 @@ CREATE TABLE [dbo].[SheduleItemSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [BeginTime] time  NULL,
     [EndTime] time  NULL,
-    [SchoolShedule_Id] int  NOT NULL,
+    [Shedule_Id] int  NOT NULL,
     [SubjectSubCategory_Id] int  NOT NULL
 );
 GO
@@ -136,8 +225,7 @@ CREATE TABLE [dbo].[SheduleHoursSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [BeginTime] time  NOT NULL,
     [EndTime] time  NOT NULL,
-    [SchoolShedule_Id] int  NOT NULL,
-    [SheduleItem_Id] int  NOT NULL
+    [Shedule_Id] int  NOT NULL
 );
 GO
 
@@ -146,11 +234,10 @@ CREATE TABLE [dbo].[InformationsSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [InfoForStudent] nvarchar(max)  NOT NULL,
     [InfoForParent] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(20)  NOT NULL,
     [Info] nvarchar(max)  NOT NULL,
-    [InfoForTeacher] bit  NOT NULL,
-    [StudyGroup_Id] int  NOT NULL,
-    [Student_Id] int  NOT NULL
+    [StudyGroup_Id] int  NULL,
+    [Student_Id] int  NULL
 );
 GO
 
@@ -158,15 +245,15 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id], [QRcode] in table 'UserSet'
+-- Creating primary key on [Id] in table 'UserSet'
 ALTER TABLE [dbo].[UserSet]
 ADD CONSTRAINT [PK_UserSet]
-    PRIMARY KEY CLUSTERED ([Id], [QRcode] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SchoolYearSet'
-ALTER TABLE [dbo].[SchoolYearSet]
-ADD CONSTRAINT [PK_SchoolYearSet]
+-- Creating primary key on [Id] in table 'YearSet'
+ALTER TABLE [dbo].[YearSet]
+ADD CONSTRAINT [PK_YearSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -194,9 +281,9 @@ ADD CONSTRAINT [PK_SubjectSubCategorySet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SchoolResultsSet'
-ALTER TABLE [dbo].[SchoolResultsSet]
-ADD CONSTRAINT [PK_SchoolResultsSet]
+-- Creating primary key on [Id] in table 'ResultsSet'
+ALTER TABLE [dbo].[ResultsSet]
+ADD CONSTRAINT [PK_ResultsSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -206,9 +293,9 @@ ADD CONSTRAINT [PK_StudentsNotesSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SchoolSheduleSet'
-ALTER TABLE [dbo].[SchoolSheduleSet]
-ADD CONSTRAINT [PK_SchoolSheduleSet]
+-- Creating primary key on [Id] in table 'SheduleSet'
+ALTER TABLE [dbo].[SheduleSet]
+ADD CONSTRAINT [PK_SheduleSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -240,26 +327,26 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [User_Id], [User_QRcode] in table 'SchoolYearSet'
-ALTER TABLE [dbo].[SchoolYearSet]
+-- Creating foreign key on [User_Id] in table 'YearSet'
+ALTER TABLE [dbo].[YearSet]
 ADD CONSTRAINT [FK_UserSchoolYear]
-    FOREIGN KEY ([User_Id], [User_QRcode])
+    FOREIGN KEY ([User_Id])
     REFERENCES [dbo].[UserSet]
-        ([Id], [QRcode])
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserSchoolYear'
 CREATE INDEX [IX_FK_UserSchoolYear]
-ON [dbo].[SchoolYearSet]
-    ([User_Id], [User_QRcode]);
+ON [dbo].[YearSet]
+    ([User_Id]);
 GO
 
 -- Creating foreign key on [SchoolYear_Id] in table 'StudyGroupSet'
 ALTER TABLE [dbo].[StudyGroupSet]
 ADD CONSTRAINT [FK_SchoolYearStudyGroup]
     FOREIGN KEY ([SchoolYear_Id])
-    REFERENCES [dbo].[SchoolYearSet]
+    REFERENCES [dbo].[YearSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -289,7 +376,7 @@ GO
 ALTER TABLE [dbo].[StudySubjectSet]
 ADD CONSTRAINT [FK_SchoolYearStudySubject]
     FOREIGN KEY ([SchoolYear_Id])
-    REFERENCES [dbo].[SchoolYearSet]
+    REFERENCES [dbo].[YearSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -315,8 +402,8 @@ ON [dbo].[SubjectSubCategorySet]
     ([StudySubject_Id]);
 GO
 
--- Creating foreign key on [SubjectSubCategory_Id] in table 'SchoolResultsSet'
-ALTER TABLE [dbo].[SchoolResultsSet]
+-- Creating foreign key on [SubjectSubCategory_Id] in table 'ResultsSet'
+ALTER TABLE [dbo].[ResultsSet]
 ADD CONSTRAINT [FK_SubjectSubCategorySchoolResults]
     FOREIGN KEY ([SubjectSubCategory_Id])
     REFERENCES [dbo].[SubjectSubCategorySet]
@@ -326,12 +413,12 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SubjectSubCategorySchoolResults'
 CREATE INDEX [IX_FK_SubjectSubCategorySchoolResults]
-ON [dbo].[SchoolResultsSet]
+ON [dbo].[ResultsSet]
     ([SubjectSubCategory_Id]);
 GO
 
--- Creating foreign key on [Student_Id] in table 'SchoolResultsSet'
-ALTER TABLE [dbo].[SchoolResultsSet]
+-- Creating foreign key on [Student_Id] in table 'ResultsSet'
+ALTER TABLE [dbo].[ResultsSet]
 ADD CONSTRAINT [FK_StudentSchoolResults]
     FOREIGN KEY ([Student_Id])
     REFERENCES [dbo].[StudentSet]
@@ -341,7 +428,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_StudentSchoolResults'
 CREATE INDEX [IX_FK_StudentSchoolResults]
-ON [dbo].[SchoolResultsSet]
+ON [dbo].[ResultsSet]
     ([Student_Id]);
 GO
 
@@ -375,26 +462,26 @@ ON [dbo].[StudentsNotesSet]
     ([Student_Id]);
 GO
 
--- Creating foreign key on [SchoolYear_Id] in table 'SchoolSheduleSet'
-ALTER TABLE [dbo].[SchoolSheduleSet]
+-- Creating foreign key on [SchoolYear_Id] in table 'SheduleSet'
+ALTER TABLE [dbo].[SheduleSet]
 ADD CONSTRAINT [FK_SchoolYearSchoolShedule]
     FOREIGN KEY ([SchoolYear_Id])
-    REFERENCES [dbo].[SchoolYearSet]
+    REFERENCES [dbo].[YearSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SchoolYearSchoolShedule'
 CREATE INDEX [IX_FK_SchoolYearSchoolShedule]
-ON [dbo].[SchoolSheduleSet]
+ON [dbo].[SheduleSet]
     ([SchoolYear_Id]);
 GO
 
--- Creating foreign key on [SchoolShedule_Id] in table 'SheduleItemSet'
+-- Creating foreign key on [Shedule_Id] in table 'SheduleItemSet'
 ALTER TABLE [dbo].[SheduleItemSet]
 ADD CONSTRAINT [FK_SchoolSheduleSheduleItem]
-    FOREIGN KEY ([SchoolShedule_Id])
-    REFERENCES [dbo].[SchoolSheduleSet]
+    FOREIGN KEY ([Shedule_Id])
+    REFERENCES [dbo].[SheduleSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -402,7 +489,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_SchoolSheduleSheduleItem'
 CREATE INDEX [IX_FK_SchoolSheduleSheduleItem]
 ON [dbo].[SheduleItemSet]
-    ([SchoolShedule_Id]);
+    ([Shedule_Id]);
 GO
 
 -- Creating foreign key on [Student_Id] in table 'AttendanceSet'
@@ -435,11 +522,11 @@ ON [dbo].[SheduleItemSet]
     ([SubjectSubCategory_Id]);
 GO
 
--- Creating foreign key on [SchoolShedule_Id] in table 'SheduleHoursSet'
+-- Creating foreign key on [Shedule_Id] in table 'SheduleHoursSet'
 ALTER TABLE [dbo].[SheduleHoursSet]
 ADD CONSTRAINT [FK_SchoolSheduleSheduleHours]
-    FOREIGN KEY ([SchoolShedule_Id])
-    REFERENCES [dbo].[SchoolSheduleSet]
+    FOREIGN KEY ([Shedule_Id])
+    REFERENCES [dbo].[SheduleSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -447,22 +534,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_SchoolSheduleSheduleHours'
 CREATE INDEX [IX_FK_SchoolSheduleSheduleHours]
 ON [dbo].[SheduleHoursSet]
-    ([SchoolShedule_Id]);
-GO
-
--- Creating foreign key on [SheduleItem_Id] in table 'SheduleHoursSet'
-ALTER TABLE [dbo].[SheduleHoursSet]
-ADD CONSTRAINT [FK_SheduleItemSheduleHours]
-    FOREIGN KEY ([SheduleItem_Id])
-    REFERENCES [dbo].[SheduleItemSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SheduleItemSheduleHours'
-CREATE INDEX [IX_FK_SheduleItemSheduleHours]
-ON [dbo].[SheduleHoursSet]
-    ([SheduleItem_Id]);
+    ([Shedule_Id]);
 GO
 
 -- Creating foreign key on [StudyGroup_Id] in table 'InformationsSet'

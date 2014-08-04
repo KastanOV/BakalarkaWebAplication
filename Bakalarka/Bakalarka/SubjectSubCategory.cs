@@ -16,7 +16,7 @@ namespace Bakalarka
     {
         public SubjectSubCategory()
         {
-            this.SchoolResults = new HashSet<SchoolResults>();
+            this.Results = new HashSet<Results>();
             this.StudentsNotes = new HashSet<StudentsNotes>();
         }
     
@@ -24,7 +24,7 @@ namespace Bakalarka
         public string Name { get; set; }
     
         public virtual StudySubject StudySubject { get; set; }
-        public virtual ICollection<SchoolResults> SchoolResults { get; set; }
+        public virtual ICollection<Results> Results { get; set; }
         public virtual ICollection<StudentsNotes> StudentsNotes { get; set; }
         public virtual SheduleItem SheduleItem { get; set; }
     }

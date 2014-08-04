@@ -16,13 +16,13 @@ namespace Bakalarka
     {
         public User()
         {
-            this.SchoolYear = new HashSet<SchoolYear>();
+            this.SchoolYear = new HashSet<Year>();
         }
     
         public string Id { get; set; }
         public bool UsingEvenOddShedule { get; set; }
         public string QRcode { get; set; }
     
-        public virtual ICollection<SchoolYear> SchoolYear { get; set; }
+        public virtual ICollection<Year> SchoolYear { get; set; }
     }
 }

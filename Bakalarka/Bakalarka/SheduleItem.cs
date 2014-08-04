@@ -18,8 +18,7 @@ namespace Bakalarka
         public Nullable<System.TimeSpan> BeginTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
     
-        public virtual SchoolShedule SchoolShedule { get; set; }
+        public virtual Shedule Shedule { get; set; }
         public virtual SubjectSubCategory SubjectSubCategory { get; set; }
-        public virtual SheduleHours SheduleHours { get; set; }
     }
 }

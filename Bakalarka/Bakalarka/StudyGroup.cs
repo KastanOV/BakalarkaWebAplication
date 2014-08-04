@@ -23,7 +23,7 @@ namespace Bakalarka
         public int Id { get; set; }
         public string GroupName { get; set; }
     
-        public virtual SchoolYear SchoolYear { get; set; }
+        public virtual Year SchoolYear { get; set; }
         public virtual ICollection<Student> Student { get; set; }
         public virtual ICollection<Informations> Informations { get; set; }
     }

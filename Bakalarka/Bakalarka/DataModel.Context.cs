@@ -26,14 +26,14 @@ namespace Bakalarka
         }
     
         public virtual DbSet<User> UserSet { get; set; }
-        public virtual DbSet<SchoolYear> SchoolYearSet { get; set; }
+        public virtual DbSet<Year> YearSet { get; set; }
         public virtual DbSet<StudyGroup> StudyGroupSet { get; set; }
         public virtual DbSet<Student> StudentSet { get; set; }
         public virtual DbSet<StudySubject> StudySubjectSet { get; set; }
         public virtual DbSet<SubjectSubCategory> SubjectSubCategorySet { get; set; }
-        public virtual DbSet<SchoolResults> SchoolResultsSet { get; set; }
+        public virtual DbSet<Results> ResultsSet { get; set; }
         public virtual DbSet<StudentsNotes> StudentsNotesSet { get; set; }
-        public virtual DbSet<SchoolShedule> SchoolSheduleSet { get; set; }
+        public virtual DbSet<Shedule> SheduleSet { get; set; }
         public virtual DbSet<Attendance> AttendanceSet { get; set; }
         public virtual DbSet<SheduleItem> SheduleItemSet { get; set; }
         public virtual DbSet<SheduleHours> SheduleHoursSet { get; set; }

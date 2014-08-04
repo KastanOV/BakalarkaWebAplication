@@ -16,7 +16,7 @@ namespace Bakalarka
     {
         public Student()
         {
-            this.SchoolResults = new HashSet<SchoolResults>();
+            this.Results = new HashSet<Results>();
             this.StudentsNotes = new HashSet<StudentsNotes>();
             this.Attendance = new HashSet<Attendance>();
             this.Informations = new HashSet<Informations>();
@@ -31,7 +31,7 @@ namespace Bakalarka
         public string QRcodeStudent { get; set; }
     
         public virtual StudyGroup StudyGroup { get; set; }
-        public virtual ICollection<SchoolResults> SchoolResults { get; set; }
+        public virtual ICollection<Results> Results { get; set; }
         public virtual ICollection<StudentsNotes> StudentsNotes { get; set; }
         public virtual ICollection<Attendance> Attendance { get; set; }
         public virtual ICollection<Informations> Informations { get; set; }
