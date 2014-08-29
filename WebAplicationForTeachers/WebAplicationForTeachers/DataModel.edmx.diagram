@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b0d9ef11059451d84c5e757dc2c1b72" Name="Diagram1">
+        <EntityTypeShape EntityType="PupilBookModel.AttendanceSet" Width="1.5" PointX="7" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.InformationsSet" Width="1.5" PointX="6.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.ResultsSet" Width="1.5" PointX="7.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.SheduleHoursSet" Width="1.5" PointX="0.875" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.SheduleItemSet" Width="1.5" PointX="0.875" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.SheduleSet" Width="1.5" PointX="0.875" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.StudentSet" Width="1.5" PointX="9.375" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.StudentsNotesSet" Width="1.5" PointX="5.625" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.StudyGroupSet" Width="1.5" PointX="3.875" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.StudySubjectSet" Width="1.5" PointX="2.875" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.SubjectSubCategorySet" Width="1.5" PointX="2.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.UserSet" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PupilBookModel.YearSet" Width="1.5" PointX="2.875" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="PupilBookModel.FK_StudentAttendance" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudentInformations" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudyGroupInformations" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudentSchoolResults" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SubjectSubCategorySchoolResults" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleHours" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SheduleItemSubjectSubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleItem" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolYearSchoolShedule" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudentStudentsNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudyGroupStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SubjectSubCategoryStudentsNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolYearStudyGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolYearStudySubject" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_StudySubjectSubjectSubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="PupilBookModel.FK_UserSchoolYear" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
