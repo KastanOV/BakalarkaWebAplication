@@ -23,6 +23,8 @@ namespace WebAplicationForTeachers
         public int Id { get; set; }
         public string GroupName { get; set; }
         public int SchoolYear_Id { get; set; }
+        public string GroupNameShort { get; set; }
+        public string GroupDescription { get; set; }
     
         public virtual ICollection<InformationsSet> InformationsSet { get; set; }
         public virtual ICollection<StudentSet> StudentSet { get; set; }

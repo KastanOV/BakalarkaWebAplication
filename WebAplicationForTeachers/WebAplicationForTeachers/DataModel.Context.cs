@@ -12,6 +12,8 @@ namespace WebAplicationForTeachers
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class PupilBookEntities : DbContext
     {
@@ -38,5 +40,59 @@ namespace WebAplicationForTeachers
         public virtual DbSet<SubjectSubCategorySet> SubjectSubCategorySet { get; set; }
         public virtual DbSet<UserSet> UserSet { get; set; }
         public virtual DbSet<YearSet> YearSet { get; set; }
+    
+        public virtual int CreateUser(string p_id, string p_FirstName, string p_MidleName, string p_LastName, string p_Phone, string p_Adress, string p_City, string p_Postal)
+        {
+            var p_idParameter = p_id != null ?
+                new ObjectParameter("p_id", p_id) :
+                new ObjectParameter("p_id", typeof(string));
+    
+            var p_FirstNameParameter = p_FirstName != null ?
+                new ObjectParameter("p_FirstName", p_FirstName) :
+                new ObjectParameter("p_FirstName", typeof(string));
+    
+            var p_MidleNameParameter = p_MidleName != null ?
+                new ObjectParameter("p_MidleName", p_MidleName) :
+                new ObjectParameter("p_MidleName", typeof(string));
+    
+            var p_LastNameParameter = p_LastName != null ?
+                new ObjectParameter("p_LastName", p_LastName) :
+                new ObjectParameter("p_LastName", typeof(string));
+    
+            var p_PhoneParameter = p_Phone != null ?
+                new ObjectParameter("p_Phone", p_Phone) :
+                new ObjectParameter("p_Phone", typeof(string));
+    
+            var p_AdressParameter = p_Adress != null ?
+                new ObjectParameter("p_Adress", p_Adress) :
+                new ObjectParameter("p_Adress", typeof(string));
+    
+            var p_CityParameter = p_City != null ?
+                new ObjectParameter("p_City", p_City) :
+                new ObjectParameter("p_City", typeof(string));
+    
+            var p_PostalParameter = p_Postal != null ?
+                new ObjectParameter("p_Postal", p_Postal) :
+                new ObjectParameter("p_Postal", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreateUser", p_idParameter, p_FirstNameParameter, p_MidleNameParameter, p_LastNameParameter, p_PhoneParameter, p_AdressParameter, p_CityParameter, p_PostalParameter);
+        }
+    
+        public virtual int CreateStudent(string p_FirstName, string p_LastName, Nullable<int> p_StudyGroup_Id)
+        {
+            var p_FirstNameParameter = p_FirstName != null ?
+                new ObjectParameter("p_FirstName", p_FirstName) :
+                new ObjectParameter("p_FirstName", typeof(string));
+    
+            var p_LastNameParameter = p_LastName != null ?
+                new ObjectParameter("p_LastName", p_LastName) :
+                new ObjectParameter("p_LastName", typeof(string));
+    
+            var p_StudyGroup_IdParameter = p_StudyGroup_Id.HasValue ?
+                new ObjectParameter("p_StudyGroup_Id", p_StudyGroup_Id) :
+                new ObjectParameter("p_StudyGroup_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreateStudent", p_FirstNameParameter, p_LastNameParameter, p_StudyGroup_IdParameter);
+        }
     }
 }

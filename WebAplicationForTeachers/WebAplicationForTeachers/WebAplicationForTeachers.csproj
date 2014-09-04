@@ -211,6 +211,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="FirstRun\Init.aspx" />
+    <Content Include="FirstRun\CreateClassRoom.aspx" />
+    <Content Include="Students\EditStudents.aspx" />
+    <Content Include="MainMenu\MainMenu.aspx" />
+    <Content Include="WebForm5.aspx" />
     <EntityDeploy Include="DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
@@ -432,6 +437,7 @@
     <Compile Include="InformationsSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassRooms\ClassRoomsTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultsSet.cs">
@@ -485,6 +491,41 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="FirstRun\Init.aspx.cs">
+      <DependentUpon>Init.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FirstRun\Init.aspx.designer.cs">
+      <DependentUpon>Init.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FirstRun\CreateClassRoom.aspx.cs">
+      <DependentUpon>CreateClassRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FirstRun\CreateClassRoom.aspx.designer.cs">
+      <DependentUpon>CreateClassRoom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Students\EditStudents.aspx.cs">
+      <DependentUpon>EditStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Students\EditStudents.aspx.designer.cs">
+      <DependentUpon>EditStudents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu\MainMenu.aspx.cs">
+      <DependentUpon>MainMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMenu\MainMenu.aspx.designer.cs">
+      <DependentUpon>MainMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm5.aspx.cs">
+      <DependentUpon>WebForm5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm5.aspx.designer.cs">
+      <DependentUpon>WebForm5.aspx</DependentUpon>
     </Compile>
     <Compile Include="YearSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

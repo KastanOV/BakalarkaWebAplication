@@ -22,6 +22,13 @@ namespace WebAplicationForTeachers
         public string Id { get; set; }
         public bool UsingEvenOddShedule { get; set; }
         public string QRcode { get; set; }
+        public string FirstName { get; set; }
+        public string MidleName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Adress { get; set; }
+        public string City { get; set; }
+        public string Postal { get; set; }
     
         public virtual ICollection<YearSet> YearSet { get; set; }
     }

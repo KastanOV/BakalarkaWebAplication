@@ -30,6 +30,8 @@ namespace WebAplicationForTeachers
         public string QRcodeKeyParent { get; set; }
         public string QRcodeKeyStudent { get; set; }
         public int StudyGroup_Id { get; set; }
+        public string ParentsEmail { get; set; }
+        public string ParentsPhone { get; set; }
     
         public virtual ICollection<AttendanceSet> AttendanceSet { get; set; }
         public virtual ICollection<InformationsSet> InformationsSet { get; set; }

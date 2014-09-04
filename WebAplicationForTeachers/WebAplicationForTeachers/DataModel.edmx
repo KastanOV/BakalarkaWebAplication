@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PupilBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PupilBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AttendanceSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -74,11 +74,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="QRcodeKeyParent" Type="nvarchar" MaxLength="32" />
           <Property Name="QRcodeKeyStudent" Type="nvarchar" MaxLength="32" />
           <Property Name="StudyGroup_Id" Type="int" Nullable="false" />
+          <Property Name="ParentsEmail" Type="varchar" MaxLength="50" />
+          <Property Name="ParentsPhone" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="StudentsNotesSet">
           <Key>
@@ -95,8 +97,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GroupName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" />
           <Property Name="SchoolYear_Id" Type="int" Nullable="false" />
+          <Property Name="GroupNameShort" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GroupDescription" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="StudySubjectSet">
           <Key>
@@ -120,7 +124,14 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UsingEvenOddShedule" Type="bit" Nullable="false" />
-          <Property Name="QRcode" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="QRcode" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MidleName" Type="varchar" MaxLength="20" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postal" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="YearSet">
           <Key>
@@ -323,6 +334,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CreateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="p_LastName" Type="varchar" Mode="In" />
+          <Parameter Name="p_StudyGroup_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_id" Type="varchar" Mode="In" />
+          <Parameter Name="p_FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="p_MidleName" Type="varchar" Mode="In" />
+          <Parameter Name="p_LastName" Type="varchar" Mode="In" />
+          <Parameter Name="p_Phone" Type="varchar" Mode="In" />
+          <Parameter Name="p_Adress" Type="varchar" Mode="In" />
+          <Parameter Name="p_City" Type="varchar" Mode="In" />
+          <Parameter Name="p_Postal" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="PupilBookModelStoreContainer">
           <EntitySet Name="AttendanceSet" EntityType="Self.AttendanceSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationsSet" EntityType="Self.InformationsSet" Schema="dbo" store:Type="Tables" />
@@ -402,8 +428,7 @@
             <End Role="YearSet" EntitySet="YearSet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PupilBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -487,8 +512,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="QRcodeKeyParent" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="QRcodeKeyStudent" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="StudyGroup_Id" Type="Int32" Nullable="false" />
@@ -497,6 +522,8 @@
           <NavigationProperty Name="ResultsSet" Relationship="Self.FK_StudentSchoolResults" FromRole="StudentSet" ToRole="ResultsSet" />
           <NavigationProperty Name="StudentsNotesSet" Relationship="Self.FK_StudentStudentsNotes" FromRole="StudentSet" ToRole="StudentsNotesSet" />
           <NavigationProperty Name="StudyGroupSet" Relationship="Self.FK_StudyGroupStudent" FromRole="StudentSet" ToRole="StudyGroupSet" />
+          <Property Name="ParentsEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentsPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StudentsNotesSet">
           <Key>
@@ -515,11 +542,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SchoolYear_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InformationsSet" Relationship="Self.FK_StudyGroupInformations" FromRole="StudyGroupSet" ToRole="InformationsSet" />
           <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudyGroupStudent" FromRole="StudyGroupSet" ToRole="StudentSet" />
           <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearStudyGroup" FromRole="StudyGroupSet" ToRole="YearSet" />
+          <Property Name="GroupNameShort" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GroupDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StudySubjectSet">
           <Key>
@@ -549,8 +578,15 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UsingEvenOddShedule" Type="Boolean" Nullable="false" />
-          <Property Name="QRcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QRcode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="YearSet" Relationship="Self.FK_UserSchoolYear" FromRole="UserSet" ToRole="YearSet" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MidleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Postal" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="YearSet">
           <Key>
@@ -835,6 +871,21 @@
             <End Role="UserSet" EntitySet="UserSet" />
             <End Role="YearSet" EntitySet="YearSet" />
           </AssociationSet>
+          <FunctionImport Name="CreateUser">
+            <Parameter Name="p_id" Mode="In" Type="String" />
+            <Parameter Name="p_FirstName" Mode="In" Type="String" />
+            <Parameter Name="p_MidleName" Mode="In" Type="String" />
+            <Parameter Name="p_LastName" Mode="In" Type="String" />
+            <Parameter Name="p_Phone" Mode="In" Type="String" />
+            <Parameter Name="p_Adress" Mode="In" Type="String" />
+            <Parameter Name="p_City" Mode="In" Type="String" />
+            <Parameter Name="p_Postal" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateStudent">
+            <Parameter Name="p_FirstName" Mode="In" Type="String" />
+            <Parameter Name="p_LastName" Mode="In" Type="String" />
+            <Parameter Name="p_StudyGroup_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -913,6 +964,8 @@
           <EntitySetMapping Name="StudentSet">
             <EntityTypeMapping TypeName="PupilBookModel.StudentSet">
               <MappingFragment StoreEntitySet="StudentSet">
+                <ScalarProperty Name="ParentsPhone" ColumnName="ParentsPhone" />
+                <ScalarProperty Name="ParentsEmail" ColumnName="ParentsEmail" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -938,6 +991,8 @@
           <EntitySetMapping Name="StudyGroupSet">
             <EntityTypeMapping TypeName="PupilBookModel.StudyGroupSet">
               <MappingFragment StoreEntitySet="StudyGroupSet">
+                <ScalarProperty Name="GroupDescription" ColumnName="GroupDescription" />
+                <ScalarProperty Name="GroupNameShort" ColumnName="GroupNameShort" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="SchoolYear_Id" ColumnName="SchoolYear_Id" />
@@ -965,6 +1020,13 @@
           <EntitySetMapping Name="UserSet">
             <EntityTypeMapping TypeName="PupilBookModel.UserSet">
               <MappingFragment StoreEntitySet="UserSet">
+                <ScalarProperty Name="Postal" ColumnName="Postal" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MidleName" ColumnName="MidleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UsingEvenOddShedule" ColumnName="UsingEvenOddShedule" />
                 <ScalarProperty Name="QRcode" ColumnName="QRcode" />
@@ -981,6 +1043,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="PupilBookModel.Store.CreateUser" />
+          <FunctionImportMapping FunctionImportName="CreateStudent" FunctionName="PupilBookModel.Store.CreateStudent" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

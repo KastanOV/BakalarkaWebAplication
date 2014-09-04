@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PupilBookModelStoreContainer" CdmEntityContainer="PupilBookEntities">
+    <EntitySetMapping Name="AttendanceSet">
+      <EntityTypeMapping TypeName="PupilBookModel.AttendanceSet">
+        <MappingFragment StoreEntitySet="AttendanceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MissingStart" ColumnName="MissingStart" />
+          <ScalarProperty Name="MissingEnd" ColumnName="MissingEnd" />
+          <ScalarProperty Name="Excused" ColumnName="Excused" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InformationsSet">
+      <EntityTypeMapping TypeName="PupilBookModel.InformationsSet">
+        <MappingFragment StoreEntitySet="InformationsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InfoForStudent" ColumnName="InfoForStudent" />
+          <ScalarProperty Name="InfoForParent" ColumnName="InfoForParent" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultsSet">
+      <EntityTypeMapping TypeName="PupilBookModel.ResultsSet">
+        <MappingFragment StoreEntitySet="ResultsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="StorageDate" ColumnName="StorageDate" />
+          <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SheduleHoursSet">
+      <EntityTypeMapping TypeName="PupilBookModel.SheduleHoursSet">
+        <MappingFragment StoreEntitySet="SheduleHoursSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SheduleItemSet">
+      <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
+        <MappingFragment StoreEntitySet="SheduleItemSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
+          <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SheduleSet">
+      <EntityTypeMapping TypeName="PupilBookModel.SheduleSet">
+        <MappingFragment StoreEntitySet="SheduleSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Period" ColumnName="Period" />
+          <ScalarProperty Name="EvenWeek" ColumnName="EvenWeek" />
+          <ScalarProperty Name="SchoolYear_Id" ColumnName="SchoolYear_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentSet">
+      <EntityTypeMapping TypeName="PupilBookModel.StudentSet">
+        <MappingFragment StoreEntitySet="StudentSet">
+          <ScalarProperty Name="ParentsPhone" ColumnName="ParentsPhone" />
+          <ScalarProperty Name="ParentsEmail" ColumnName="ParentsEmail" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="QRcodeKeyParent" ColumnName="QRcodeKeyParent" />
+          <ScalarProperty Name="QRcodeKeyStudent" ColumnName="QRcodeKeyStudent" />
+          <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentsNotesSet">
+      <EntityTypeMapping TypeName="PupilBookModel.StudentsNotesSet">
+        <MappingFragment StoreEntitySet="StudentsNotesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudyGroupSet">
+      <EntityTypeMapping TypeName="PupilBookModel.StudyGroupSet">
+        <MappingFragment StoreEntitySet="StudyGroupSet">
+          <ScalarProperty Name="GroupDescription" ColumnName="GroupDescription" />
+          <ScalarProperty Name="GroupNameShort" ColumnName="GroupNameShort" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="SchoolYear_Id" ColumnName="SchoolYear_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudySubjectSet">
+      <EntityTypeMapping TypeName="PupilBookModel.StudySubjectSet">
+        <MappingFragment StoreEntitySet="StudySubjectSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SchoolYear_Id" ColumnName="SchoolYear_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubjectSubCategorySet">
+      <EntityTypeMapping TypeName="PupilBookModel.SubjectSubCategorySet">
+        <MappingFragment StoreEntitySet="SubjectSubCategorySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StudySubject_Id" ColumnName="StudySubject_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="PupilBookModel.UserSet">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Postal" ColumnName="Postal" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MidleName" ColumnName="MidleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UsingEvenOddShedule" ColumnName="UsingEvenOddShedule" />
+          <ScalarProperty Name="QRcode" ColumnName="QRcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YearSet">
+      <EntityTypeMapping TypeName="PupilBookModel.YearSet">
+        <MappingFragment StoreEntitySet="YearSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ActualYear" ColumnName="ActualYear" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="PupilBookModel.Store.CreateUser" />
+    <FunctionImportMapping FunctionImportName="CreateStudent" FunctionName="PupilBookModel.Store.CreateStudent" />
+  </EntityContainerMapping>
+</Mapping>

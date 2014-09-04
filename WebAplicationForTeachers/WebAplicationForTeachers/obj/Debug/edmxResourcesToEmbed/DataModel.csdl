@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PupilBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AttendanceSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MissingStart" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MissingEnd" Type="DateTime" Precision="3" />
+    <Property Name="Excused" Type="Boolean" Nullable="false" />
+    <Property Name="Student_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudentAttendance" FromRole="AttendanceSet" ToRole="StudentSet" />
+  </EntityType>
+  <EntityType Name="InformationsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InfoForStudent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InfoForParent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StudyGroup_Id" Type="Int32" />
+    <Property Name="Student_Id" Type="Int32" />
+    <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudentInformations" FromRole="InformationsSet" ToRole="StudentSet" />
+    <NavigationProperty Name="StudyGroupSet" Relationship="Self.FK_StudyGroupInformations" FromRole="InformationsSet" ToRole="StudyGroupSet" />
+  </EntityType>
+  <EntityType Name="ResultsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Score" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+    <Property Name="StorageDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+    <Property Name="Student_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudentSchoolResults" FromRole="ResultsSet" ToRole="StudentSet" />
+    <NavigationProperty Name="SubjectSubCategorySet" Relationship="Self.FK_SubjectSubCategorySchoolResults" FromRole="ResultsSet" ToRole="SubjectSubCategorySet" />
+  </EntityType>
+  <EntityType Name="SheduleHoursSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolSheduleSheduleHours" FromRole="SheduleHoursSet" ToRole="SheduleSet" />
+  </EntityType>
+  <EntityType Name="SheduleItemSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BeginTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="Day" Type="Byte" Nullable="false" />
+    <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
+    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SubjectSubCategorySet" Relationship="Self.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
+    <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
+  </EntityType>
+  <EntityType Name="SheduleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Period" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="EvenWeek" Type="Boolean" />
+    <Property Name="SchoolYear_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SheduleHoursSet" Relationship="Self.FK_SchoolSheduleSheduleHours" FromRole="SheduleSet" ToRole="SheduleHoursSet" />
+    <NavigationProperty Name="SheduleItemSet" Relationship="Self.FK_SchoolSheduleSheduleItem" FromRole="SheduleSet" ToRole="SheduleItemSet" />
+    <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearSchoolShedule" FromRole="SheduleSet" ToRole="YearSet" />
+  </EntityType>
+  <EntityType Name="StudentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QRcodeKeyParent" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="QRcodeKeyStudent" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StudyGroup_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AttendanceSet" Relationship="Self.FK_StudentAttendance" FromRole="StudentSet" ToRole="AttendanceSet" />
+    <NavigationProperty Name="InformationsSet" Relationship="Self.FK_StudentInformations" FromRole="StudentSet" ToRole="InformationsSet" />
+    <NavigationProperty Name="ResultsSet" Relationship="Self.FK_StudentSchoolResults" FromRole="StudentSet" ToRole="ResultsSet" />
+    <NavigationProperty Name="StudentsNotesSet" Relationship="Self.FK_StudentStudentsNotes" FromRole="StudentSet" ToRole="StudentsNotesSet" />
+    <NavigationProperty Name="StudyGroupSet" Relationship="Self.FK_StudyGroupStudent" FromRole="StudentSet" ToRole="StudyGroupSet" />
+    <Property Name="ParentsEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ParentsPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StudentsNotesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+    <Property Name="Student_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudentStudentsNotes" FromRole="StudentsNotesSet" ToRole="StudentSet" />
+    <NavigationProperty Name="SubjectSubCategorySet" Relationship="Self.FK_SubjectSubCategoryStudentsNotes" FromRole="StudentsNotesSet" ToRole="SubjectSubCategorySet" />
+  </EntityType>
+  <EntityType Name="StudyGroupSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SchoolYear_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InformationsSet" Relationship="Self.FK_StudyGroupInformations" FromRole="StudyGroupSet" ToRole="InformationsSet" />
+    <NavigationProperty Name="StudentSet" Relationship="Self.FK_StudyGroupStudent" FromRole="StudyGroupSet" ToRole="StudentSet" />
+    <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearStudyGroup" FromRole="StudyGroupSet" ToRole="YearSet" />
+    <Property Name="GroupNameShort" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="GroupDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StudySubjectSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SchoolYear_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearStudySubject" FromRole="StudySubjectSet" ToRole="YearSet" />
+    <NavigationProperty Name="SubjectSubCategorySet" Relationship="Self.FK_StudySubjectSubjectSubCategory" FromRole="StudySubjectSet" ToRole="SubjectSubCategorySet" />
+  </EntityType>
+  <EntityType Name="SubjectSubCategorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StudySubject_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ResultsSet" Relationship="Self.FK_SubjectSubCategorySchoolResults" FromRole="SubjectSubCategorySet" ToRole="ResultsSet" />
+    <NavigationProperty Name="SheduleItemSet" Relationship="Self.FK_SheduleItemSubjectSubCategory" FromRole="SubjectSubCategorySet" ToRole="SheduleItemSet" />
+    <NavigationProperty Name="StudentsNotesSet" Relationship="Self.FK_SubjectSubCategoryStudentsNotes" FromRole="SubjectSubCategorySet" ToRole="StudentsNotesSet" />
+    <NavigationProperty Name="StudySubjectSet" Relationship="Self.FK_StudySubjectSubjectSubCategory" FromRole="SubjectSubCategorySet" ToRole="StudySubjectSet" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UsingEvenOddShedule" Type="Boolean" Nullable="false" />
+    <Property Name="QRcode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="YearSet" Relationship="Self.FK_UserSchoolYear" FromRole="UserSet" ToRole="YearSet" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MidleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Postal" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="YearSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ActualYear" Type="Boolean" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolYearSchoolShedule" FromRole="YearSet" ToRole="SheduleSet" />
+    <NavigationProperty Name="StudyGroupSet" Relationship="Self.FK_SchoolYearStudyGroup" FromRole="YearSet" ToRole="StudyGroupSet" />
+    <NavigationProperty Name="StudySubjectSet" Relationship="Self.FK_SchoolYearStudySubject" FromRole="YearSet" ToRole="StudySubjectSet" />
+    <NavigationProperty Name="UserSet" Relationship="Self.FK_UserSchoolYear" FromRole="YearSet" ToRole="UserSet" />
+  </EntityType>
+  <Association Name="FK_StudentAttendance">
+    <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="1" />
+    <End Role="AttendanceSet" Type="Self.AttendanceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AttendanceSet">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInformations">
+    <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="0..1" />
+    <End Role="InformationsSet" Type="Self.InformationsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationsSet">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudyGroupInformations">
+    <End Role="StudyGroupSet" Type="Self.StudyGroupSet" Multiplicity="0..1" />
+    <End Role="InformationsSet" Type="Self.InformationsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyGroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationsSet">
+        <PropertyRef Name="StudyGroup_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentSchoolResults">
+    <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="1" />
+    <End Role="ResultsSet" Type="Self.ResultsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResultsSet">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectSubCategorySchoolResults">
+    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
+    <End Role="ResultsSet" Type="Self.ResultsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectSubCategorySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResultsSet">
+        <PropertyRef Name="SubjectSubCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolSheduleSheduleHours">
+    <End Role="SheduleSet" Type="Self.SheduleSet" Multiplicity="1" />
+    <End Role="SheduleHoursSet" Type="Self.SheduleHoursSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SheduleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleHoursSet">
+        <PropertyRef Name="Shedule_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SheduleItemSubjectSubCategory">
+    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
+    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectSubCategorySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="SubjectSubCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolSheduleSheduleItem">
+    <End Role="SheduleSet" Type="Self.SheduleSet" Multiplicity="1" />
+    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SheduleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="Shedule_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolYearSchoolShedule">
+    <End Role="YearSet" Type="Self.YearSet" Multiplicity="1" />
+    <End Role="SheduleSet" Type="Self.SheduleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YearSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleSet">
+        <PropertyRef Name="SchoolYear_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentStudentsNotes">
+    <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="1" />
+    <End Role="StudentsNotesSet" Type="Self.StudentsNotesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentsNotesSet">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudyGroupStudent">
+    <End Role="StudyGroupSet" Type="Self.StudyGroupSet" Multiplicity="1" />
+    <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyGroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentSet">
+        <PropertyRef Name="StudyGroup_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectSubCategoryStudentsNotes">
+    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
+    <End Role="StudentsNotesSet" Type="Self.StudentsNotesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectSubCategorySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentsNotesSet">
+        <PropertyRef Name="SubjectSubCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolYearStudyGroup">
+    <End Role="YearSet" Type="Self.YearSet" Multiplicity="1" />
+    <End Role="StudyGroupSet" Type="Self.StudyGroupSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YearSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudyGroupSet">
+        <PropertyRef Name="SchoolYear_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolYearStudySubject">
+    <End Role="YearSet" Type="Self.YearSet" Multiplicity="1" />
+    <End Role="StudySubjectSet" Type="Self.StudySubjectSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YearSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudySubjectSet">
+        <PropertyRef Name="SchoolYear_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudySubjectSubjectSubCategory">
+    <End Role="StudySubjectSet" Type="Self.StudySubjectSet" Multiplicity="1" />
+    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudySubjectSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubjectSubCategorySet">
+        <PropertyRef Name="StudySubject_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSchoolYear">
+    <End Role="UserSet" Type="Self.UserSet" Multiplicity="1" />
+    <End Role="YearSet" Type="Self.YearSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="YearSet">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PupilBookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AttendanceSet" EntityType="Self.AttendanceSet" />
+    <EntitySet Name="InformationsSet" EntityType="Self.InformationsSet" />
+    <EntitySet Name="ResultsSet" EntityType="Self.ResultsSet" />
+    <EntitySet Name="SheduleHoursSet" EntityType="Self.SheduleHoursSet" />
+    <EntitySet Name="SheduleItemSet" EntityType="Self.SheduleItemSet" />
+    <EntitySet Name="SheduleSet" EntityType="Self.SheduleSet" />
+    <EntitySet Name="StudentSet" EntityType="Self.StudentSet" />
+    <EntitySet Name="StudentsNotesSet" EntityType="Self.StudentsNotesSet" />
+    <EntitySet Name="StudyGroupSet" EntityType="Self.StudyGroupSet" />
+    <EntitySet Name="StudySubjectSet" EntityType="Self.StudySubjectSet" />
+    <EntitySet Name="SubjectSubCategorySet" EntityType="Self.SubjectSubCategorySet" />
+    <EntitySet Name="UserSet" EntityType="Self.UserSet" />
+    <EntitySet Name="YearSet" EntityType="Self.YearSet" />
+    <AssociationSet Name="FK_StudentAttendance" Association="Self.FK_StudentAttendance">
+      <End Role="StudentSet" EntitySet="StudentSet" />
+      <End Role="AttendanceSet" EntitySet="AttendanceSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInformations" Association="Self.FK_StudentInformations">
+      <End Role="StudentSet" EntitySet="StudentSet" />
+      <End Role="InformationsSet" EntitySet="InformationsSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudyGroupInformations" Association="Self.FK_StudyGroupInformations">
+      <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
+      <End Role="InformationsSet" EntitySet="InformationsSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentSchoolResults" Association="Self.FK_StudentSchoolResults">
+      <End Role="StudentSet" EntitySet="StudentSet" />
+      <End Role="ResultsSet" EntitySet="ResultsSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectSubCategorySchoolResults" Association="Self.FK_SubjectSubCategorySchoolResults">
+      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
+      <End Role="ResultsSet" EntitySet="ResultsSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolSheduleSheduleHours" Association="Self.FK_SchoolSheduleSheduleHours">
+      <End Role="SheduleSet" EntitySet="SheduleSet" />
+      <End Role="SheduleHoursSet" EntitySet="SheduleHoursSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="Self.FK_SheduleItemSubjectSubCategory">
+      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolSheduleSheduleItem" Association="Self.FK_SchoolSheduleSheduleItem">
+      <End Role="SheduleSet" EntitySet="SheduleSet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolYearSchoolShedule" Association="Self.FK_SchoolYearSchoolShedule">
+      <End Role="YearSet" EntitySet="YearSet" />
+      <End Role="SheduleSet" EntitySet="SheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentStudentsNotes" Association="Self.FK_StudentStudentsNotes">
+      <End Role="StudentSet" EntitySet="StudentSet" />
+      <End Role="StudentsNotesSet" EntitySet="StudentsNotesSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudyGroupStudent" Association="Self.FK_StudyGroupStudent">
+      <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
+      <End Role="StudentSet" EntitySet="StudentSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectSubCategoryStudentsNotes" Association="Self.FK_SubjectSubCategoryStudentsNotes">
+      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
+      <End Role="StudentsNotesSet" EntitySet="StudentsNotesSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolYearStudyGroup" Association="Self.FK_SchoolYearStudyGroup">
+      <End Role="YearSet" EntitySet="YearSet" />
+      <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolYearStudySubject" Association="Self.FK_SchoolYearStudySubject">
+      <End Role="YearSet" EntitySet="YearSet" />
+      <End Role="StudySubjectSet" EntitySet="StudySubjectSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudySubjectSubjectSubCategory" Association="Self.FK_StudySubjectSubjectSubCategory">
+      <End Role="StudySubjectSet" EntitySet="StudySubjectSet" />
+      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSchoolYear" Association="Self.FK_UserSchoolYear">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="YearSet" EntitySet="YearSet" />
+    </AssociationSet>
+    <FunctionImport Name="CreateUser">
+      <Parameter Name="p_id" Mode="In" Type="String" />
+      <Parameter Name="p_FirstName" Mode="In" Type="String" />
+      <Parameter Name="p_MidleName" Mode="In" Type="String" />
+      <Parameter Name="p_LastName" Mode="In" Type="String" />
+      <Parameter Name="p_Phone" Mode="In" Type="String" />
+      <Parameter Name="p_Adress" Mode="In" Type="String" />
+      <Parameter Name="p_City" Mode="In" Type="String" />
+      <Parameter Name="p_Postal" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateStudent">
+      <Parameter Name="p_FirstName" Mode="In" Type="String" />
+      <Parameter Name="p_LastName" Mode="In" Type="String" />
+      <Parameter Name="p_StudyGroup_Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
