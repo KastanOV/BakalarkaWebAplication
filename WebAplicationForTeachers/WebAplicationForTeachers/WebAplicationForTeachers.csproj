@@ -215,7 +215,7 @@
     <Content Include="FirstRun\CreateClassRoom.aspx" />
     <Content Include="Students\EditStudents.aspx" />
     <Content Include="MainMenu\MainMenu.aspx" />
-    <Content Include="WebForm5.aspx" />
+    <Content Include="MainMenu\SheduleCreator.aspx" />
     <EntityDeploy Include="DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
@@ -520,12 +520,12 @@
     <Compile Include="MainMenu\MainMenu.aspx.designer.cs">
       <DependentUpon>MainMenu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm5.aspx.cs">
-      <DependentUpon>WebForm5.aspx</DependentUpon>
+    <Compile Include="MainMenu\SheduleCreator.aspx.cs">
+      <DependentUpon>SheduleCreator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm5.aspx.designer.cs">
-      <DependentUpon>WebForm5.aspx</DependentUpon>
+    <Compile Include="MainMenu\SheduleCreator.aspx.designer.cs">
+      <DependentUpon>SheduleCreator.aspx</DependentUpon>
     </Compile>
     <Compile Include="YearSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

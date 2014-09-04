@@ -17,23 +17,32 @@
                         <asp:Button ID="ButtonAddYear" runat="server" Text="Add School Year" OnClick="AddYear_Click" CssClass="form-control" />
                     </asp:TableCell>
                 </asp:TableRow>
+                
+            </asp:Table>
+            <hr />
+            <asp:Table runat="server">
                 <asp:TableRow>
-                    <asp:TableCell ColumnSpan="3">
+                    <%--<asp:TableCell>
+                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                    </asp:TableCell>--%>
+                    <asp:TableCell>
                         <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                    </asp:TableCell>
+                    
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
 
         </asp:View>
+
         <asp:View ID="ViewStudyGroups" runat="server">
             <h2>School Year
         <asp:Label ID="LabelYear" runat="server" Text="Label"></asp:Label>
             </h2>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <asp:Button runat="server" Text="Change School Year" CssClass="btn btn-default" OnClick="ChangeShoolYear_Click" />
-                </div>
-            </div>
+            
+            
             <p class="text-danger">
                 <asp:Literal runat="server" ID="ErrorMessage" />
             </p>
@@ -92,7 +101,27 @@
                     <asp:ControlParameter ControlID="DropDownListYears" Name="SchoolYear_Id" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
+
+            <hr />
+            <asp:Table runat="server">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                    </asp:TableCell>
+                    <%--<asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                    </asp:TableCell>--%>
+                    <%--<asp:TableCell>
+                        <asp:Button runat="server" Text="Go to ClassRooms" CssClass="form-control" OnClick="GoToStudyGroups_Click" />
+                    </asp:TableCell>--%>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+
         </asp:View>
+
         <asp:View ID="ViewStudyGroup" runat="server">
             <div class="form-horizontal">
                 <h4>Add Student to
@@ -125,7 +154,7 @@
 
             <hr />
 
-            <asp:GridView ID="GridViewStudents" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Id" DataSourceID="SqlDataSourceStudyGroups" ForeColor="Black" GridLines="Vertical" >
+            <asp:GridView ID="GridViewStudents" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Id" DataSourceID="SqlDataSourceStudyGroups" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
@@ -144,7 +173,7 @@
                 <SortedDescendingCellStyle BackColor="#EAEAD3" />
                 <SortedDescendingHeaderStyle BackColor="#575357" />
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSourceStudyGroups" runat="server" ConnectionString="<%$ ConnectionStrings:PupilBookConnectionString %>" SelectCommand="SELECT [Id], [FirstName], [LastName], [StudyGroup_Id] FROM [StudentSet] WHERE ([StudyGroup_Id] = @StudyGroup_Id) ORDER BY [LastName]" DeleteCommand="DELETE FROM [StudentSet] WHERE [Id] = @original_Id" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [StudentSet] SET [FirstName] = @FirstName, [LastName] = @LastName WHERE [Id] = @original_Id" >
+            <asp:SqlDataSource ID="SqlDataSourceStudyGroups" runat="server" ConnectionString="<%$ ConnectionStrings:PupilBookConnectionString %>" SelectCommand="SELECT [Id], [FirstName], [LastName], [StudyGroup_Id] FROM [StudentSet] WHERE ([StudyGroup_Id] = @StudyGroup_Id) ORDER BY [LastName]" DeleteCommand="DELETE FROM [StudentSet] WHERE [Id] = @original_Id" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [StudentSet] SET [FirstName] = @FirstName, [LastName] = @LastName WHERE [Id] = @original_Id">
                 <DeleteParameters>
                     <asp:Parameter Name="original_Id" Type="Int32" />
                 </DeleteParameters>
@@ -165,9 +194,111 @@
             </asp:SqlDataSource>
             <hr />
 
-            <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" Text="Go Back to ClassRooms" CssClass="btn btn-default" OnClick="GoToStudyGroups_Click" />
-            </div>
+            <asp:Table runat="server">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                    </asp:TableCell>
+                    
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </asp:View>
+
+        <asp:View ID="ViewStudySubjects" runat="server">
+            <asp:Table runat="server">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell>Choose study category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>New study Category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell></asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:DropDownList ID="ddlStudyCategory" runat="server" AutoPostBack="True" DataSourceID="sdsStudySubject"  CssClass="form-control" DataTextField="Name" DataValueField="Id"></asp:DropDownList>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="tbNewStudyCategory" runat="server" CssClass="form-control"></asp:TextBox>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button ID="bInsertNewStudyCategory" Text="Crete new Category" runat="server" OnClick="bInsertNewStudyCategory_Click" CssClass="form-control" />
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell>Choose study Sub category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>New study Sub Category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell></asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableHeaderRow>
+                    <asp:TableCell>
+                        <asp:DropDownList ID="ddlStudySubCategory" AutoPostBack="true" runat="server"  CssClass="form-control" DataSourceID="sdsSubjectSubCategory" DataTextField="Name" DataValueField="Id"></asp:DropDownList>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="tbNewStudySubCategory" runat="server" CssClass="form-control"></asp:TextBox>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button ID="bInserNnewStudySubCategory" Text="Creta new SubCategory" runat="server" OnClick="bInserNnewStudySubCategory_Click" CssClass="form-control" />
+                    </asp:TableCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+            <asp:GridView ID="gvStudyCategory" runat="server" DataSourceID="sdsStudyCategory" AutoGenerateColumns="False" DataKeyNames="Id,Expr1" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
+                    <asp:BoundField DataField="StudySubject_Id" HeaderText="StudySubject_Id" SortExpression="StudySubject_Id" Visible="False" />
+                    <asp:BoundField DataField="Expr1" HeaderText="StudySubject_id_PrimaryKey" InsertVisible="False" ReadOnly="True" SortExpression="Expr1" Visible="False" />
+                    <asp:BoundField DataField="Expr2" HeaderText="Name of Subject" SortExpression="Expr2" />
+                    <asp:BoundField DataField="Name" HeaderText="Name of Sub subject" SortExpression="Name" />
+                    <asp:BoundField DataField="SchoolYear_Id" HeaderText="SchoolYear_Id" SortExpression="SchoolYear_Id" Visible="False" />
+                </Columns>
+                <FooterStyle BackColor="#CCCC99" />
+                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                <RowStyle BackColor="#F7F7DE" />
+                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                <SortedAscendingHeaderStyle BackColor="#848384" />
+                <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                <SortedDescendingHeaderStyle BackColor="#575357" />
+            </asp:GridView>
+            <asp:SqlDataSource ID="sdsStudyCategory" runat="server" ConnectionString="<%$ ConnectionStrings:PupilBookConnectionString %>" SelectCommand="SELECT SubjectSubCategorySet.Id, SubjectSubCategorySet.Name, SubjectSubCategorySet.StudySubject_Id, StudySubjectSet.Id AS Expr1, StudySubjectSet.Name AS Expr2, StudySubjectSet.SchoolYear_Id FROM StudySubjectSet INNER JOIN SubjectSubCategorySet ON StudySubjectSet.Id = SubjectSubCategorySet.StudySubject_Id WHERE (StudySubjectSet.SchoolYear_Id = @SchoolYear_Id) Order by Expr2">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DropDownListYears" Name="SchoolYear_Id" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="sdsStudySubject" runat="server" ConnectionString="<%$ ConnectionStrings:PupilBookConnectionString %>" SelectCommand="SELECT * FROM [StudySubjectSet] WHERE ([SchoolYear_Id] = @SchoolYear_Id)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DropDownListYears" Name="SchoolYear_Id" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="sdsSubjectSubCategory" runat="server" ConnectionString="<%$ ConnectionStrings:PupilBookConnectionString %>" SelectCommand="SELECT * FROM [SubjectSubCategorySet] WHERE ([StudySubject_Id] = @StudySubject_Id)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="ddlStudyCategory" Name="StudySubject_Id" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
+            <hr />
+
+            <asp:Table runat="server">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                    </asp:TableCell>
+                    <%--<asp:TableCell>
+                        <asp:Button runat="server" Text="Go to ClassRooms" CssClass="form-control" OnClick="GoToStudyGroups_Click" />
+                    </asp:TableCell>--%>
+                    <%--<asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                    </asp:TableCell>--%>
+                </asp:TableRow>
+            </asp:Table>
         </asp:View>
     </asp:MultiView>
 </asp:Content>

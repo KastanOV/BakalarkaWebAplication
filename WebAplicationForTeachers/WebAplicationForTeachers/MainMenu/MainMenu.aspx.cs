@@ -22,6 +22,8 @@ namespace WebAplicationForTeachers
             string UserID = User.Identity.GetUserId();
             if (!IsPostBack)
             {
+                //Loading First View
+
                 MultiViewMainPage.ActiveViewIndex = 0;
                 var items = new ListItem();
                 var FirstItem = (from i in db.YearSet
@@ -42,6 +44,12 @@ namespace WebAplicationForTeachers
                         DropDownListYears.Items.Add(new ListItem(FirstItem.Name, FirstItem.Id.ToString()));
                     }
                 }
+
+                //Loading Fourth View Study subjects
+                //var subjectsItems = from i in db.StudySubjectSet
+                //                    where i.SchoolYear_Id == Int32.Parse(DropDownListYears.SelectedValue)
+                //                    select new { SubjectID = i.Id, SubjectName = i.Name };
+
 
             }
 
@@ -103,8 +111,6 @@ namespace WebAplicationForTeachers
 
         }
 
-        
-
         protected void GoToStudyGroups_Click(object sender, EventArgs e)
         {
             MultiViewMainPage.ActiveViewIndex = 1;
@@ -113,6 +119,47 @@ namespace WebAplicationForTeachers
         protected void GridViewClassRooms_SelectedIndexChanged(object sender, EventArgs e)
         {
             MultiViewMainPage.ActiveViewIndex = 2;
+        }
+
+        protected void bInsertNewStudyCategory_Click(object sender, EventArgs e)
+        {
+            if (tbNewStudyCategory.Text == "") { tbNewStudyCategory.BackColor = Color.MistyRose; tbNewStudyCategory.ToolTip = "This is Required field"; return; }
+            else
+            {
+                StudySubjectSet item = new StudySubjectSet() 
+                {
+                    Name = tbNewStudyCategory.Text,
+                    SchoolYear_Id = Int32.Parse(DropDownListYears.Text)
+                };
+                db.StudySubjectSet.Add(item);
+                db.SaveChanges();
+                ddlStudyCategory.Items.Add(new ListItem(item.Name,item.Id.ToString()));
+            }
+            tbNewStudyCategory.Text = "";
+            gvStudyCategory.DataBind();
+        }
+
+        protected void bInserNnewStudySubCategory_Click(object sender, EventArgs e)
+        {
+            if (tbNewStudySubCategory.Text == "") { tbNewStudySubCategory.BackColor = Color.MistyRose; tbNewStudySubCategory.ToolTip = "This is Required field"; return; }
+            else
+            {
+                SubjectSubCategorySet item = new SubjectSubCategorySet()
+                {
+                    Name = tbNewStudySubCategory.Text,
+                    StudySubject_Id = Int32.Parse(ddlStudyCategory.SelectedValue)
+                };
+                db.SubjectSubCategorySet.Add(item);
+                db.SaveChanges();
+                ddlStudySubCategory.Items.Add(new ListItem(item.Name, item.Id.ToString()));
+                tbNewStudySubCategory.Text = "";
+                gvStudyCategory.DataBind();
+            }
+        }
+
+        protected void GotoSubjectGroups1_Click(object sender, EventArgs e)
+        {
+            MultiViewMainPage.ActiveViewIndex = 3;
         }
     }
 }
