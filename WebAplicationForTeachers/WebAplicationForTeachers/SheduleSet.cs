@@ -26,7 +26,7 @@ namespace WebAplicationForTeachers
         public int SchoolYear_Id { get; set; }
     
         public virtual ICollection<SheduleHoursSet> SheduleHoursSet { get; set; }
-        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
         public virtual YearSet YearSet { get; set; }
+        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
     }
 }

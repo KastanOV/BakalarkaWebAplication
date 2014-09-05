@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="PupilBookModel.InformationsSet" Width="1.5" PointX="8.25" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PupilBookModel.ResultsSet" Width="1.5" PointX="5.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PupilBookModel.SheduleHoursSet" Width="1.5" PointX="0.5" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PupilBookModel.SheduleItemSet" Width="1.5" PointX="0.5" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PupilBookModel.SheduleSet" Width="1.5" PointX="0.5" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PupilBookModel.StudentSet" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PupilBookModel.StudentsNotesSet" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
@@ -24,8 +23,6 @@
         <AssociationConnector Association="PupilBookModel.FK_StudentSchoolResults" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_SubjectSubCategorySchoolResults" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleHours" ManuallyRouted="false" />
-        <AssociationConnector Association="PupilBookModel.FK_SheduleItemSubjectSubCategory" ManuallyRouted="false" />
-        <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleItem" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_SchoolYearSchoolShedule" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_StudentStudentsNotes" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_StudyGroupStudent" ManuallyRouted="false" />
@@ -34,6 +31,10 @@
         <AssociationConnector Association="PupilBookModel.FK_SchoolYearStudySubject" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_StudySubjectSubjectSubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_UserSchoolYear" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PupilBookModel.SheduleItemSet" Width="1.5" PointX="0.5" PointY="10" />
+        <AssociationConnector Association="PupilBookModel.FK_SheduleItemSubjectSubCategory" />
+        <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleItem" />
+        <AssociationConnector Association="PupilBookModel.fk_StudyGroupSet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

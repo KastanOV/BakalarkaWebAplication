@@ -48,19 +48,6 @@
     <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolSheduleSheduleHours" FromRole="SheduleHoursSet" ToRole="SheduleSet" />
   </EntityType>
-  <EntityType Name="SheduleItemSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BeginTime" Type="Time" Precision="7" />
-    <Property Name="EndTime" Type="Time" Precision="7" />
-    <Property Name="Day" Type="Byte" Nullable="false" />
-    <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
-    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="SubjectSubCategorySet" Relationship="Self.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
-    <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
-  </EntityType>
   <EntityType Name="SheduleSet">
     <Key>
       <PropertyRef Name="Id" />
@@ -70,8 +57,8 @@
     <Property Name="EvenWeek" Type="Boolean" />
     <Property Name="SchoolYear_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SheduleHoursSet" Relationship="Self.FK_SchoolSheduleSheduleHours" FromRole="SheduleSet" ToRole="SheduleHoursSet" />
-    <NavigationProperty Name="SheduleItemSet" Relationship="Self.FK_SchoolSheduleSheduleItem" FromRole="SheduleSet" ToRole="SheduleItemSet" />
     <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearSchoolShedule" FromRole="SheduleSet" ToRole="YearSet" />
+    <NavigationProperty Name="SheduleItemSet" Relationship="PupilBookModel.FK_SchoolSheduleSheduleItem" FromRole="SheduleSet" ToRole="SheduleItemSet" />
   </EntityType>
   <EntityType Name="StudentSet">
     <Key>
@@ -117,6 +104,7 @@
     <NavigationProperty Name="YearSet" Relationship="Self.FK_SchoolYearStudyGroup" FromRole="StudyGroupSet" ToRole="YearSet" />
     <Property Name="GroupNameShort" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="GroupDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SheduleItemSet" Relationship="PupilBookModel.fk_StudyGroupSet" FromRole="StudyGroupSet" ToRole="SheduleItemSet" />
   </EntityType>
   <EntityType Name="StudySubjectSet">
     <Key>
@@ -136,9 +124,9 @@
     <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="StudySubject_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ResultsSet" Relationship="Self.FK_SubjectSubCategorySchoolResults" FromRole="SubjectSubCategorySet" ToRole="ResultsSet" />
-    <NavigationProperty Name="SheduleItemSet" Relationship="Self.FK_SheduleItemSubjectSubCategory" FromRole="SubjectSubCategorySet" ToRole="SheduleItemSet" />
     <NavigationProperty Name="StudentsNotesSet" Relationship="Self.FK_SubjectSubCategoryStudentsNotes" FromRole="SubjectSubCategorySet" ToRole="StudentsNotesSet" />
     <NavigationProperty Name="StudySubjectSet" Relationship="Self.FK_StudySubjectSubjectSubCategory" FromRole="SubjectSubCategorySet" ToRole="StudySubjectSet" />
+    <NavigationProperty Name="SheduleItemSet" Relationship="PupilBookModel.FK_SheduleItemSubjectSubCategory" FromRole="SubjectSubCategorySet" ToRole="SheduleItemSet" />
   </EntityType>
   <EntityType Name="UserSet">
     <Key>
@@ -237,30 +225,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SheduleHoursSet">
-        <PropertyRef Name="Shedule_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SheduleItemSubjectSubCategory">
-    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
-    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SubjectSubCategorySet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SheduleItemSet">
-        <PropertyRef Name="SubjectSubCategory_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SchoolSheduleSheduleItem">
-    <End Role="SheduleSet" Type="Self.SheduleSet" Multiplicity="1" />
-    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SheduleSet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SheduleItemSet">
         <PropertyRef Name="Shedule_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -366,7 +330,6 @@
     <EntitySet Name="InformationsSet" EntityType="Self.InformationsSet" />
     <EntitySet Name="ResultsSet" EntityType="Self.ResultsSet" />
     <EntitySet Name="SheduleHoursSet" EntityType="Self.SheduleHoursSet" />
-    <EntitySet Name="SheduleItemSet" EntityType="Self.SheduleItemSet" />
     <EntitySet Name="SheduleSet" EntityType="Self.SheduleSet" />
     <EntitySet Name="StudentSet" EntityType="Self.StudentSet" />
     <EntitySet Name="StudentsNotesSet" EntityType="Self.StudentsNotesSet" />
@@ -398,14 +361,6 @@
     <AssociationSet Name="FK_SchoolSheduleSheduleHours" Association="Self.FK_SchoolSheduleSheduleHours">
       <End Role="SheduleSet" EntitySet="SheduleSet" />
       <End Role="SheduleHoursSet" EntitySet="SheduleHoursSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="Self.FK_SheduleItemSubjectSubCategory">
-      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
-      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SchoolSheduleSheduleItem" Association="Self.FK_SchoolSheduleSheduleItem">
-      <End Role="SheduleSet" EntitySet="SheduleSet" />
-      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
     </AssociationSet>
     <AssociationSet Name="FK_SchoolYearSchoolShedule" Association="Self.FK_SchoolYearSchoolShedule">
       <End Role="YearSet" EntitySet="YearSet" />
@@ -454,5 +409,69 @@
       <Parameter Name="p_LastName" Mode="In" Type="String" />
       <Parameter Name="p_StudyGroup_Id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="SheduleItemSet" EntityType="PupilBookModel.SheduleItemSet" />
+    <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="PupilBookModel.FK_SheduleItemSubjectSubCategory">
+      <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolSheduleSheduleItem" Association="PupilBookModel.FK_SchoolSheduleSheduleItem">
+      <End Role="SheduleSet" EntitySet="SheduleSet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StudyGroupSet" Association="PupilBookModel.fk_StudyGroupSet">
+      <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SheduleItemSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BeginTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="Day" Type="Byte" Nullable="false" />
+    <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
+    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+    <Property Name="StudyGroup_Id" Type="Int32" />
+    <NavigationProperty Name="SubjectSubCategorySet" Relationship="PupilBookModel.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
+    <NavigationProperty Name="SheduleSet" Relationship="PupilBookModel.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
+    <NavigationProperty Name="StudyGroupSet" Relationship="PupilBookModel.fk_StudyGroupSet" FromRole="SheduleItemSet" ToRole="StudyGroupSet" />
+  </EntityType>
+  <Association Name="FK_SheduleItemSubjectSubCategory">
+    <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />
+    <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectSubCategorySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="SubjectSubCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolSheduleSheduleItem">
+    <End Type="PupilBookModel.SheduleSet" Role="SheduleSet" Multiplicity="1" />
+    <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SheduleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="Shedule_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StudyGroupSet">
+    <End Type="PupilBookModel.StudyGroupSet" Role="StudyGroupSet" Multiplicity="0..1" />
+    <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyGroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="StudyGroup_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

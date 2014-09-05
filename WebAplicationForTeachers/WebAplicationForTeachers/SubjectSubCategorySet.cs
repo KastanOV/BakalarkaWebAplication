@@ -17,8 +17,8 @@ namespace WebAplicationForTeachers
         public SubjectSubCategorySet()
         {
             this.ResultsSet = new HashSet<ResultsSet>();
-            this.SheduleItemSet = new HashSet<SheduleItemSet>();
             this.StudentsNotesSet = new HashSet<StudentsNotesSet>();
+            this.SheduleItemSet = new HashSet<SheduleItemSet>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace WebAplicationForTeachers
         public int StudySubject_Id { get; set; }
     
         public virtual ICollection<ResultsSet> ResultsSet { get; set; }
-        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
         public virtual ICollection<StudentsNotesSet> StudentsNotesSet { get; set; }
         public virtual StudySubjectSet StudySubjectSet { get; set; }
+        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
     }
 }

@@ -47,18 +47,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SheduleItemSet">
-      <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
-        <MappingFragment StoreEntitySet="SheduleItemSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="Day" ColumnName="Day" />
-          <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
-          <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SheduleSet">
       <EntityTypeMapping TypeName="PupilBookModel.SheduleSet">
         <MappingFragment StoreEntitySet="SheduleSet">
@@ -153,5 +141,18 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="PupilBookModel.Store.CreateUser" />
     <FunctionImportMapping FunctionImportName="CreateStudent" FunctionName="PupilBookModel.Store.CreateStudent" />
+    <EntitySetMapping Name="SheduleItemSet">
+      <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
+        <MappingFragment StoreEntitySet="SheduleItemSet">
+          <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
+          <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
+          <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

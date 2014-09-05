@@ -52,6 +52,7 @@
     <Property Name="Day" Type="tinyint" Nullable="false" />
     <Property Name="Shedule_Id" Type="int" Nullable="false" />
     <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
+    <Property Name="StudyGroup_Id" Type="int" />
   </EntityType>
   <EntityType Name="SheduleSet">
     <Key>
@@ -269,6 +270,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_StudyGroupSet">
+    <End Role="StudyGroupSet" Type="Self.StudyGroupSet" Multiplicity="0..1" />
+    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyGroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="StudyGroup_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudyGroupStudent">
     <End Role="StudyGroupSet" Type="Self.StudyGroupSet" Multiplicity="1" />
     <End Role="StudentSet" Type="Self.StudentSet" Multiplicity="*" />
@@ -401,6 +414,10 @@
     <AssociationSet Name="FK_StudyGroupInformations" Association="Self.FK_StudyGroupInformations">
       <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
       <End Role="InformationsSet" EntitySet="InformationsSet" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StudyGroupSet" Association="Self.fk_StudyGroupSet">
+      <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
     </AssociationSet>
     <AssociationSet Name="FK_StudyGroupStudent" Association="Self.FK_StudyGroupStudent">
       <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />

@@ -22,9 +22,9 @@
             <hr />
             <asp:Table runat="server">
                 <asp:TableRow>
-                    <%--<asp:TableCell>
-                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
-                    </asp:TableCell>--%>
+                    <asp:TableCell>
+                        <asp:Button runat="server" Text="Go to Shedule creator" CssClass="form-control" OnClick="GoToSheduleCreator_Click" />
+                    </asp:TableCell>
                     <asp:TableCell>
                         <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
                     </asp:TableCell>

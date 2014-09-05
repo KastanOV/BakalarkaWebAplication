@@ -20,8 +20,10 @@ namespace WebAplicationForTeachers
         public byte Day { get; set; }
         public int Shedule_Id { get; set; }
         public int SubjectSubCategory_Id { get; set; }
+        public Nullable<int> StudyGroup_Id { get; set; }
     
         public virtual SubjectSubCategorySet SubjectSubCategorySet { get; set; }
         public virtual SheduleSet SheduleSet { get; set; }
+        public virtual StudyGroupSet StudyGroupSet { get; set; }
     }
 }

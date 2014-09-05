@@ -161,5 +161,10 @@ namespace WebAplicationForTeachers
         {
             MultiViewMainPage.ActiveViewIndex = 3;
         }
+
+        protected void GoToSheduleCreator_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MainMenu/SheduleCreator.aspx?YearID=" + DropDownListYears.SelectedValue);
+        }
     }
 }

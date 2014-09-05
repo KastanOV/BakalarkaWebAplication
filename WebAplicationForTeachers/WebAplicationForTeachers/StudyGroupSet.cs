@@ -18,6 +18,7 @@ namespace WebAplicationForTeachers
         {
             this.InformationsSet = new HashSet<InformationsSet>();
             this.StudentSet = new HashSet<StudentSet>();
+            this.SheduleItemSet = new HashSet<SheduleItemSet>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,6 @@ namespace WebAplicationForTeachers
         public virtual ICollection<InformationsSet> InformationsSet { get; set; }
         public virtual ICollection<StudentSet> StudentSet { get; set; }
         public virtual YearSet YearSet { get; set; }
+        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
     }
 }

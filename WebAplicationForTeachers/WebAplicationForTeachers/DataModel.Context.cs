@@ -31,7 +31,6 @@ namespace WebAplicationForTeachers
         public virtual DbSet<InformationsSet> InformationsSet { get; set; }
         public virtual DbSet<ResultsSet> ResultsSet { get; set; }
         public virtual DbSet<SheduleHoursSet> SheduleHoursSet { get; set; }
-        public virtual DbSet<SheduleItemSet> SheduleItemSet { get; set; }
         public virtual DbSet<SheduleSet> SheduleSet { get; set; }
         public virtual DbSet<StudentSet> StudentSet { get; set; }
         public virtual DbSet<StudentsNotesSet> StudentsNotesSet { get; set; }
@@ -40,6 +39,7 @@ namespace WebAplicationForTeachers
         public virtual DbSet<SubjectSubCategorySet> SubjectSubCategorySet { get; set; }
         public virtual DbSet<UserSet> UserSet { get; set; }
         public virtual DbSet<YearSet> YearSet { get; set; }
+        public virtual DbSet<SheduleItemSet> SheduleItemSet { get; set; }
     
         public virtual int CreateUser(string p_id, string p_FirstName, string p_MidleName, string p_LastName, string p_Phone, string p_Adress, string p_City, string p_Postal)
         {
