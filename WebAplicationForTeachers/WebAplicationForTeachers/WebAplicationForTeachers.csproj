@@ -201,6 +201,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="AdvancedShedule.html" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -211,8 +212,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
-    <Content Include="FirstRun\Init.aspx" />
-    <Content Include="FirstRun\CreateClassRoom.aspx" />
     <Content Include="Students\EditStudents.aspx" />
     <Content Include="MainMenu\MainMenu.aspx" />
     <Content Include="MainMenu\SheduleCreator.aspx" />
@@ -443,6 +442,7 @@
     <Compile Include="ResultsSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\SheduleAdvancedController.cs" />
     <Compile Include="SheduleHoursSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -492,20 +492,6 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="FirstRun\Init.aspx.cs">
-      <DependentUpon>Init.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FirstRun\Init.aspx.designer.cs">
-      <DependentUpon>Init.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FirstRun\CreateClassRoom.aspx.cs">
-      <DependentUpon>CreateClassRoom.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FirstRun\CreateClassRoom.aspx.designer.cs">
-      <DependentUpon>CreateClassRoom.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Students\EditStudents.aspx.cs">
       <DependentUpon>EditStudents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -533,7 +519,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -53,6 +53,7 @@
     <Property Name="Shedule_Id" Type="int" Nullable="false" />
     <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
     <Property Name="StudyGroup_Id" Type="int" />
+    <Property Name="Even" Type="bit" />
   </EntityType>
   <EntityType Name="SheduleSet">
     <Key>
@@ -356,6 +357,9 @@
     <Parameter Name="p_Adress" Type="varchar" Mode="In" />
     <Parameter Name="p_City" Type="varchar" Mode="In" />
     <Parameter Name="p_Postal" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GenerateQRCodeKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Key" Type="varchar" Mode="InOut" />
   </Function>
   <EntityContainer Name="PupilBookModelStoreContainer">
     <EntitySet Name="AttendanceSet" EntityType="Self.AttendanceSet" Schema="dbo" store:Type="Tables" />

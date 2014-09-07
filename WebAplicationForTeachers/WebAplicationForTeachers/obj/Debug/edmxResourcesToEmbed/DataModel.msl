@@ -144,6 +144,7 @@
     <EntitySetMapping Name="SheduleItemSet">
       <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
         <MappingFragment StoreEntitySet="SheduleItemSet">
+          <ScalarProperty Name="Even" ColumnName="Even" />
           <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
           <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
           <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
@@ -154,5 +155,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
   </EntityContainerMapping>
 </Mapping>

@@ -422,6 +422,9 @@
       <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
       <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
     </AssociationSet>
+    <FunctionImport Name="GenerateQRCodeKey">
+      <Parameter Name="p_Key" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="SheduleItemSet">
     <Key>
@@ -437,6 +440,7 @@
     <NavigationProperty Name="SubjectSubCategorySet" Relationship="PupilBookModel.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
     <NavigationProperty Name="SheduleSet" Relationship="PupilBookModel.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
     <NavigationProperty Name="StudyGroupSet" Relationship="PupilBookModel.fk_StudyGroupSet" FromRole="SheduleItemSet" ToRole="StudyGroupSet" />
+    <Property Name="Even" Type="Boolean" />
   </EntityType>
   <Association Name="FK_SheduleItemSubjectSubCategory">
     <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />

@@ -105,7 +105,45 @@ namespace WebAplicationForTeachers
 
         protected void AddTimeSpan_Click(object sender, EventArgs e)
         {
+            int StartHour = Int32.Parse(ddlStartHour.Text);
+            int StartMinute = Int32.Parse(ddlStartMinute.Text);
+            int EndHour = Int32.Parse(ddlEndHour.Text);
+            int EndMinute = Int32.Parse(ddlEndMinute.Text);
+            int Shedule_id = Int32.Parse(ddlChangeShedule.SelectedValue);
 
+            TimeSpan start = new TimeSpan(StartHour,StartMinute,0);
+            TimeSpan end = new TimeSpan(EndHour, EndMinute, 0);
+            if(start >= end)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Really you night work?');", true);
+                return;
+            }
+
+            var item = from i in db.SheduleHoursSet
+                       where i.Shedule_Id == Shedule_id
+                       select i;
+            foreach (var i in item)
+            {
+                if((start >= i.BeginTime && start <= i.EndTime) || (end >= i.BeginTime && end <= i.EndTime )
+                    || (i.BeginTime >= start && i.BeginTime <= end) || (i.EndTime >= start && i.EndTime <= end))
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Shedule times conflict');", true);
+                    return;
+                }
+            }
+
+            SheduleHoursSet newHourSet = new SheduleHoursSet()
+            {
+                BeginTime = start,
+                EndTime = end,
+                Shedule_Id = Shedule_id
+            };
+
+            db.SheduleHoursSet.Add(newHourSet);
+            db.SaveChanges();
+
+            gvSheduleTimes.DataBind();
+            
         }
     }
 }

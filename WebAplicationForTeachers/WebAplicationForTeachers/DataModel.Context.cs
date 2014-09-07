@@ -94,5 +94,10 @@ namespace WebAplicationForTeachers
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreateStudent", p_FirstNameParameter, p_LastNameParameter, p_StudyGroup_IdParameter);
         }
+    
+        public virtual int GenerateQRCodeKey(ObjectParameter p_Key)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateQRCodeKey", p_Key);
+        }
     }
 }

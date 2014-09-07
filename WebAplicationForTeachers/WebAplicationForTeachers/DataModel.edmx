@@ -58,6 +58,7 @@
           <Property Name="Shedule_Id" Type="int" Nullable="false" />
           <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
           <Property Name="StudyGroup_Id" Type="int" />
+          <Property Name="Even" Type="bit" />
         </EntityType>
         <EntityType Name="SheduleSet">
           <Key>
@@ -361,6 +362,9 @@
           <Parameter Name="p_Adress" Type="varchar" Mode="In" />
           <Parameter Name="p_City" Type="varchar" Mode="In" />
           <Parameter Name="p_Postal" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GenerateQRCodeKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Key" Type="varchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="PupilBookModelStoreContainer">
           <EntitySet Name="AttendanceSet" EntityType="Self.AttendanceSet" Schema="dbo" store:Type="Tables" />
@@ -871,6 +875,9 @@
             <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
             <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
           </AssociationSet>
+          <FunctionImport Name="GenerateQRCodeKey">
+            <Parameter Name="p_Key" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="SheduleItemSet">
           <Key>
@@ -886,6 +893,7 @@
           <NavigationProperty Name="SubjectSubCategorySet" Relationship="PupilBookModel.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
           <NavigationProperty Name="SheduleSet" Relationship="PupilBookModel.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
           <NavigationProperty Name="StudyGroupSet" Relationship="PupilBookModel.fk_StudyGroupSet" FromRole="SheduleItemSet" ToRole="StudyGroupSet" />
+          <Property Name="Even" Type="Boolean" />
         </EntityType>
         <Association Name="FK_SheduleItemSubjectSubCategory">
           <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />
@@ -1072,6 +1080,7 @@
           <EntitySetMapping Name="SheduleItemSet">
             <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
               <MappingFragment StoreEntitySet="SheduleItemSet">
+                <ScalarProperty Name="Even" ColumnName="Even" />
                 <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
                 <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
                 <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
@@ -1082,6 +1091,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -21,6 +21,7 @@ namespace WebAplicationForTeachers
         public int Shedule_Id { get; set; }
         public int SubjectSubCategory_Id { get; set; }
         public Nullable<int> StudyGroup_Id { get; set; }
+        public Nullable<bool> Even { get; set; }
     
         public virtual SubjectSubCategorySet SubjectSubCategorySet { get; set; }
         public virtual SheduleSet SheduleSet { get; set; }
