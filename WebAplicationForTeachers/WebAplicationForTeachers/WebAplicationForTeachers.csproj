@@ -202,6 +202,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AdvancedShedule.html" />
+    <Content Include="AngularShedule.html" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -408,6 +409,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\SheduleHoursSetsController.cs" />
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -438,11 +440,11 @@
     </Compile>
     <Compile Include="Models\ClassRooms\ClassRoomsTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SheduleHoursSetJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultsSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\SheduleAdvancedController.cs" />
     <Compile Include="SheduleHoursSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

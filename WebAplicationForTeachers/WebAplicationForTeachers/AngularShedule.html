@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="MyController">
+        
+        <button ng-click="myData.doClick(item, $event)">Send AJAX Request</button>
+        <br />
+        Data from server: 
+        <ul>
+            <li ng-repeat="item in myData">
+                Start {{item.start}} End {{item.end}}
+            </li>
+        </ul>
+         
+    </div>
+
+    <script>
+        angular.module("myapp", [])
+            .controller("MyController", function ($scope, $http) {
+                $scope.myData = {};
+                $scope.myData.doClick = function (item, event) {
+
+                    var responsePromise = $http.get("api/SheduleHoursSets/3");
+
+                    responsePromise.success(function (data, status, headers, config) {
+                        $scope.myData.fromServer = data;
+                    });
+                    responsePromise.error(function (data, status, headers, config) {
+                        alert("AJAX failed!");
+                    });
+                }
+            });
+    </script>
+    
+</body>
+</html>

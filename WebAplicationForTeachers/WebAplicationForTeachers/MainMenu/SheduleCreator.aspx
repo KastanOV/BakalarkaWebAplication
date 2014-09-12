@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SheduleCreator.aspx.cs" Inherits="WebAplicationForTeachers.WebForm5" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="ViewSetSheduleTimes" runat="server">
             <br />
@@ -92,6 +92,8 @@
                 </asp:TableRow>
             </asp:Table>
             <hr />
+            <asp:Button runat="server" CssClass="form-control" Width="20%" ID="GoToSheduleCreator" Text="Přejít na generátor rozvrhů" OnClick="GoToSheduleCreator_Click" />
+
             <asp:GridView ID="gvSheduleTimes" runat="server" DataSourceID="sdsSheduleTimes" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Id" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
@@ -148,7 +150,11 @@
             </asp:Table>
         </asp:View>
         <asp:View ID="SheduleAdvanced" runat="server">
+            <asp:Button runat="server" ID ="LoadShedule" OnClick="LoadShedule_Click" Text="Vygenerovat Rozvrh"/>
             
+            <asp:Table ID="SheduleTable" runat="server" BorderStyle="Solid" Width="100%" >
+                
+            </asp:Table>
 
         </asp:View>
     </asp:MultiView>
