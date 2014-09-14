@@ -14,11 +14,17 @@ namespace WebAplicationForTeachers
     
     public partial class SheduleHoursSet
     {
+        public SheduleHoursSet()
+        {
+            this.SheduleItemSet = new HashSet<SheduleItemSet>();
+        }
+    
         public int Id { get; set; }
         public System.TimeSpan BeginTime { get; set; }
         public System.TimeSpan EndTime { get; set; }
         public int Shedule_Id { get; set; }
     
         public virtual SheduleSet SheduleSet { get; set; }
+        public virtual ICollection<SheduleItemSet> SheduleItemSet { get; set; }
     }
 }

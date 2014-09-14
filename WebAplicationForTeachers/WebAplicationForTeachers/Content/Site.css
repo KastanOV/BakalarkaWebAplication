@@ -36,15 +36,4 @@ input[type="select"] {
         padding: 0;
     }
 }
-.product
-{
-    height: 300px;
-    width: 150px;
-    float: left;
-    border: 2px solid #666666;
-    background-color: white;
-    padding:3px;
-    margin:5px;
-    text-align: center;
-    cursor: move;
-}
+

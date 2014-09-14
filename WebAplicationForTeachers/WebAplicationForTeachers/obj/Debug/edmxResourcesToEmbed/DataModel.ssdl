@@ -47,13 +47,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BeginTime" Type="time" Precision="7" />
-    <Property Name="EndTime" Type="time" Precision="7" />
     <Property Name="Day" Type="tinyint" Nullable="false" />
     <Property Name="Shedule_Id" Type="int" Nullable="false" />
     <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
     <Property Name="StudyGroup_Id" Type="int" />
     <Property Name="Even" Type="bit" />
+    <Property Name="SheduleHoursSet_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SheduleSet">
     <Key>
@@ -139,6 +138,18 @@
     <Property Name="ActualYear" Type="bit" Nullable="false" />
     <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
+  <Association Name="FK__SheduleIt__Shedu__01142BA1">
+    <End Role="SheduleHoursSet" Type="Self.SheduleHoursSet" Multiplicity="1" />
+    <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SheduleHoursSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduleItemSet">
+        <PropertyRef Name="SheduleHoursSet_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SheduleItemSubjectSubCategory">
     <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
     <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
@@ -375,6 +386,10 @@
     <EntitySet Name="SubjectSubCategorySet" EntityType="Self.SubjectSubCategorySet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserSet" EntityType="Self.UserSet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="YearSet" EntityType="Self.YearSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__SheduleIt__Shedu__01142BA1" Association="Self.FK__SheduleIt__Shedu__01142BA1">
+      <End Role="SheduleHoursSet" EntitySet="SheduleHoursSet" />
+      <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+    </AssociationSet>
     <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="Self.FK_SheduleItemSubjectSubCategory">
       <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
       <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />

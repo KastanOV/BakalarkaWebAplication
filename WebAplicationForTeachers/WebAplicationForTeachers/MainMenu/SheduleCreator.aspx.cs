@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.Drawing;
+using WebAplicationForTeachers.MainMenu;
 
 namespace WebAplicationForTeachers
 {
@@ -37,7 +39,7 @@ namespace WebAplicationForTeachers
                                      select i).Any();
                 if (!existShedule)
                 {
-                    MultiView1.ActiveViewIndex = 1;
+                    SelectView(1);
 
                     lYear.Text = (from i in db.YearSet
                                   where i.Id == YearID
@@ -59,8 +61,60 @@ namespace WebAplicationForTeachers
                             ddlChangeShedule.Items.Add(new ListItem("Winter semester", i.Id.ToString()));
                         }
                     }
-                    MultiView1.ActiveViewIndex = 0;
+
                 }
+                SelectView(null);
+            }
+        }
+        private void SelectView(int? View)
+        {
+            
+            if (View != null)
+            {
+                switch (View)
+                {
+                    case 0: MultiView1.ActiveViewIndex = 0;
+                        break;
+                    case 1: MultiView1.ActiveViewIndex = 1;
+                        break;
+                    case 2: MultiView1.ActiveViewIndex = 2;
+                        LoadShedule();
+                        break;
+                }
+            }
+            else
+            {
+                MultiView1.ActiveViewIndex = 0;
+            }
+            try
+            {
+                string tmp = Server.UrlDecode(Request.QueryString["SheduleItemEdit"]);
+                if (tmp == "true")
+                {
+                    MultiView1.ActiveViewIndex = 2;
+                    LoadShedule();
+                }
+            }
+            catch
+            {
+                
+            }
+
+        }
+        private void LoadShedule()
+        {
+            int SheduleID = Int32.Parse(ddlChangeShedule.SelectedValue);
+            var shedule = (from i in db.SheduleSet
+                           where i.Id == SheduleID
+                           select i).First();
+            //Testing if User using for this Shedule Even/ODD System
+            if (shedule.EvenWeek == true)
+            {
+                // Tady se bude generovat dvojitý kalendar pro sudé a liché týdny
+            }
+            else
+            {
+                CreateSimpleCalendar(SheduleID);
             }
         }
         protected void oddEvenYes_Click(object sender, EventArgs e)
@@ -81,7 +135,7 @@ namespace WebAplicationForTeachers
             db.SheduleSet.Add(item1);
             db.SheduleSet.Add(item2);
             db.SaveChanges();
-            MultiView1.ActiveViewIndex = 0;
+            SelectView(0);
         }
         protected void oddEvenNo_Click(object sender, EventArgs e)
         {
@@ -101,9 +155,8 @@ namespace WebAplicationForTeachers
             db.SheduleSet.Add(item1);
             db.SheduleSet.Add(item2);
             db.SaveChanges();
-            MultiView1.ActiveViewIndex = 0;
+            SelectView(0);
         }
-
         protected void AddTimeSpan_Click(object sender, EventArgs e)
         {
             int StartHour = Int32.Parse(ddlStartHour.Text);
@@ -116,7 +169,7 @@ namespace WebAplicationForTeachers
             TimeSpan end = new TimeSpan(EndHour, EndMinute, 0);
             if (start >= end)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Really you night work?');", true);
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Opravdu budete mít noční vyučování?');", true);
                 return;
             }
 
@@ -128,7 +181,7 @@ namespace WebAplicationForTeachers
                 if ((start >= i.BeginTime && start <= i.EndTime) || (end >= i.BeginTime && end <= i.EndTime)
                     || (i.BeginTime >= start && i.BeginTime <= end) || (i.EndTime >= start && i.EndTime <= end))
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Shedule times conflict');", true);
+                    Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Vysktl se konflikt ve vyučování, zřejmě tato vyučovací hodina zasahuje do jiné vyučovací hodiny');", true);
                     return;
                 }
             }
@@ -146,24 +199,9 @@ namespace WebAplicationForTeachers
             gvSheduleTimes.DataBind();
 
         }
-        protected void LoadShedule_Click(object sender, EventArgs e)
-        {
-            int SheduleID = Int32.Parse(ddlChangeShedule.SelectedValue);
-            var shedule = (from i in db.SheduleSet
-                           where i.Id == SheduleID
-                           select i).First();
-            //Testing if User using for this Shedule Even/ODD System
-            if (shedule.EvenWeek == true)
-            {
-                // Tady se bude generovat dvojitý kalendar pro sudé a liché týdny
-            }
-            else
-            {
-                CreateSimpleCalendar(SheduleID);
-            }
-        }
         private void CreateSimpleCalendar(int SheduleID)
         {
+
             var times = from i in db.SheduleHoursSet
                         where i.Shedule_Id == SheduleID
                         select i;
@@ -172,57 +210,48 @@ namespace WebAplicationForTeachers
                            join j in db.StudySubjectSet on i.StudySubject_Id equals j.Id
                            where j.SchoolYear_Id == YearID
                            select i;
-
             var StudyGroup = from i in db.StudyGroupSet
                              where i.SchoolYear_Id == YearID
                              select i;
 
+            TableRow rowHeader = new TableRow();
+            TableCell FirstCell = new TableCell();
+            FirstCell.CssClass = "Form-Control";
+            FirstCell.Text = "<b>Rozvrh Hodin<b/>";
 
-            
+            rowHeader.Cells.Add(FirstCell);
+
             foreach (var i in times)
             {
-                TableRow rowHeader = new TableRow();
                 TableCell cell = new TableCell();
-                Label label1 = new Label();
-                Label label2 = new Label();
-                label1.Text = String.Format("{0}:{1}", i.BeginTime.Hours, i.BeginTime.Minutes);
-                label2.Text = String.Format("{0}:{1}", i.EndTime.Hours, i.EndTime.Minutes);
-                cell.Controls.Add(label1);
-                cell.Controls.Add(label2);
+                cell.CssClass = "Form-Control";
+                cell.Text = String.Format("{0}<br/>{1}", i.BeginTime.ToString(), i.EndTime.ToString());
                 rowHeader.Cells.Add(cell);
-                //table.Add(rowHeader);
                 SheduleTable.Rows.Add(rowHeader);
             }
             for (int j = 0; j < 5; j++)
             {
+                TableCell Days = new TableCell();
+                Days.CssClass = "Form-Control";
+                Days.Text = MainMenu.Days.GetDay(j);
                 TableRow row = new TableRow();
+                row.Cells.Add(Days);
+
                 foreach (var i in times)
                 {
-                    
-                    DropDownList ddlStudyGroups = new DropDownList();
-                    DropDownList ddlSubjects = new DropDownList();
-                    foreach (var k in StudyGroup)
-                    {
-                        ddlStudyGroups.Items.Add(new ListItem(String.Format("{0}", k.GroupNameShort), k.Id.ToString()));
-                    }
-                    foreach (var k in Subjects)
-                    {
-                        ddlSubjects.Items.Add(new ListItem(String.Format("{0}", k.Name), k.Id.ToString()));
-                    }
+
                     TableCell cell1 = new TableCell();
-                    cell1.Controls.Add(ddlStudyGroups);
-                    cell1.Controls.Add(ddlSubjects);
+                    SheduleButtons button = new SheduleButtons(YearID, i.Id, j, SheduleID);
+                    cell1.Controls.Add(button);
                     row.Cells.Add(cell1);
                 }
-                //table.Add(row);
+
                 SheduleTable.Rows.Add(row);
             }
-            
         }
-
         protected void GoToSheduleCreator_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 2;
+            SelectView(2);
         }
     }
 }

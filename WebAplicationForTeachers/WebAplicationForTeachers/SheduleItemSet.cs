@@ -15,14 +15,14 @@ namespace WebAplicationForTeachers
     public partial class SheduleItemSet
     {
         public int Id { get; set; }
-        public Nullable<System.TimeSpan> BeginTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
         public byte Day { get; set; }
         public int Shedule_Id { get; set; }
         public int SubjectSubCategory_Id { get; set; }
         public Nullable<int> StudyGroup_Id { get; set; }
         public Nullable<bool> Even { get; set; }
+        public int SheduleHoursSet_ID { get; set; }
     
+        public virtual SheduleHoursSet SheduleHoursSet { get; set; }
         public virtual SubjectSubCategorySet SubjectSubCategorySet { get; set; }
         public virtual SheduleSet SheduleSet { get; set; }
         public virtual StudyGroupSet StudyGroupSet { get; set; }

@@ -141,20 +141,19 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="PupilBookModel.Store.CreateUser" />
     <FunctionImportMapping FunctionImportName="CreateStudent" FunctionName="PupilBookModel.Store.CreateStudent" />
+    <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
     <EntitySetMapping Name="SheduleItemSet">
       <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
         <MappingFragment StoreEntitySet="SheduleItemSet">
+          <ScalarProperty Name="SheduleHoursSet_ID" ColumnName="SheduleHoursSet_ID" />
           <ScalarProperty Name="Even" ColumnName="Even" />
           <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
           <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
           <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
           <ScalarProperty Name="Day" ColumnName="Day" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
   </EntityContainerMapping>
 </Mapping>

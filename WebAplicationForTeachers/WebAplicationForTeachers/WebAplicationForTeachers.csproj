@@ -216,6 +216,7 @@
     <Content Include="Students\EditStudents.aspx" />
     <Content Include="MainMenu\MainMenu.aspx" />
     <Content Include="MainMenu\SheduleCreator.aspx" />
+    <Content Include="MainMenu\SheduleItemEditor.aspx" />
     <EntityDeploy Include="DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
@@ -438,6 +439,8 @@
     <Compile Include="InformationsSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MainMenu\Days.cs" />
+    <Compile Include="MainMenu\SheduleButtons.cs" />
     <Compile Include="Models\ClassRooms\ClassRoomsTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SheduleHoursSetJson.cs" />
@@ -514,6 +517,13 @@
     </Compile>
     <Compile Include="MainMenu\SheduleCreator.aspx.designer.cs">
       <DependentUpon>SheduleCreator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu\SheduleItemEditor.aspx.cs">
+      <DependentUpon>SheduleItemEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMenu\SheduleItemEditor.aspx.designer.cs">
+      <DependentUpon>SheduleItemEditor.aspx</DependentUpon>
     </Compile>
     <Compile Include="YearSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

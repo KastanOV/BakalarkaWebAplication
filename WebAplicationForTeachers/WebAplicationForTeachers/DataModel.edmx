@@ -52,13 +52,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BeginTime" Type="time" Precision="7" />
-          <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="Day" Type="tinyint" Nullable="false" />
           <Property Name="Shedule_Id" Type="int" Nullable="false" />
           <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
           <Property Name="StudyGroup_Id" Type="int" />
           <Property Name="Even" Type="bit" />
+          <Property Name="SheduleHoursSet_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SheduleSet">
           <Key>
@@ -144,6 +143,18 @@
           <Property Name="ActualYear" Type="bit" Nullable="false" />
           <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <Association Name="FK__SheduleIt__Shedu__01142BA1">
+          <End Role="SheduleHoursSet" Type="Self.SheduleHoursSet" Multiplicity="1" />
+          <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheduleHoursSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SheduleItemSet">
+              <PropertyRef Name="SheduleHoursSet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SheduleItemSubjectSubCategory">
           <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
           <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
@@ -380,6 +391,10 @@
           <EntitySet Name="SubjectSubCategorySet" EntityType="Self.SubjectSubCategorySet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSet" EntityType="Self.UserSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YearSet" EntityType="Self.YearSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SheduleIt__Shedu__01142BA1" Association="Self.FK__SheduleIt__Shedu__01142BA1">
+            <End Role="SheduleHoursSet" EntitySet="SheduleHoursSet" />
+            <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+          </AssociationSet>
           <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="Self.FK_SheduleItemSubjectSubCategory">
             <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
             <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
@@ -500,6 +515,7 @@
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SheduleSet" Relationship="Self.FK_SchoolSheduleSheduleHours" FromRole="SheduleHoursSet" ToRole="SheduleSet" />
+          <NavigationProperty Name="SheduleItemSet" Relationship="PupilBookModel.FK__SheduleIt__Shedu__01142BA1" FromRole="SheduleHoursSet" ToRole="SheduleItemSet" />
         </EntityType>
         <EntityType Name="SheduleSet">
           <Key>
@@ -862,7 +878,14 @@
             <Parameter Name="p_LastName" Mode="In" Type="String" />
             <Parameter Name="p_StudyGroup_Id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GenerateQRCodeKey">
+          <Parameter Name="p_Key" Mode="InOut" Type="String" />
+          </FunctionImport>
           <EntitySet Name="SheduleItemSet" EntityType="PupilBookModel.SheduleItemSet" />
+          <AssociationSet Name="FK__SheduleIt__Shedu__01142BA1" Association="PupilBookModel.FK__SheduleIt__Shedu__01142BA1">
+            <End Role="SheduleHoursSet" EntitySet="SheduleHoursSet" />
+            <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
+          </AssociationSet>
           <AssociationSet Name="FK_SheduleItemSubjectSubCategory" Association="PupilBookModel.FK_SheduleItemSubjectSubCategory">
             <End Role="SubjectSubCategorySet" EntitySet="SubjectSubCategorySet" />
             <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
@@ -875,26 +898,35 @@
             <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
             <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
           </AssociationSet>
-          <FunctionImport Name="GenerateQRCodeKey">
-            <Parameter Name="p_Key" Mode="InOut" Type="String" />
-          </FunctionImport>
         </EntityContainer>
         <EntityType Name="SheduleItemSet">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BeginTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
           <Property Name="Day" Type="Byte" Nullable="false" />
           <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
           <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
           <Property Name="StudyGroup_Id" Type="Int32" />
+          <Property Name="Even" Type="Boolean" />
+          <Property Name="SheduleHoursSet_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SheduleHoursSet" Relationship="PupilBookModel.FK__SheduleIt__Shedu__01142BA1" FromRole="SheduleItemSet" ToRole="SheduleHoursSet" />
           <NavigationProperty Name="SubjectSubCategorySet" Relationship="PupilBookModel.FK_SheduleItemSubjectSubCategory" FromRole="SheduleItemSet" ToRole="SubjectSubCategorySet" />
           <NavigationProperty Name="SheduleSet" Relationship="PupilBookModel.FK_SchoolSheduleSheduleItem" FromRole="SheduleItemSet" ToRole="SheduleSet" />
           <NavigationProperty Name="StudyGroupSet" Relationship="PupilBookModel.fk_StudyGroupSet" FromRole="SheduleItemSet" ToRole="StudyGroupSet" />
-          <Property Name="Even" Type="Boolean" />
         </EntityType>
+        <Association Name="FK__SheduleIt__Shedu__01142BA1">
+          <End Type="PupilBookModel.SheduleHoursSet" Role="SheduleHoursSet" Multiplicity="1" />
+          <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheduleHoursSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SheduleItemSet">
+              <PropertyRef Name="SheduleHoursSet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SheduleItemSubjectSubCategory">
           <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />
           <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
@@ -931,7 +963,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1077,21 +1109,20 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="PupilBookModel.Store.CreateUser" />
           <FunctionImportMapping FunctionImportName="CreateStudent" FunctionName="PupilBookModel.Store.CreateStudent" />
+          <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
           <EntitySetMapping Name="SheduleItemSet">
             <EntityTypeMapping TypeName="PupilBookModel.SheduleItemSet">
               <MappingFragment StoreEntitySet="SheduleItemSet">
+                <ScalarProperty Name="SheduleHoursSet_ID" ColumnName="SheduleHoursSet_ID" />
                 <ScalarProperty Name="Even" ColumnName="Even" />
                 <ScalarProperty Name="StudyGroup_Id" ColumnName="StudyGroup_Id" />
                 <ScalarProperty Name="SubjectSubCategory_Id" ColumnName="SubjectSubCategory_Id" />
                 <ScalarProperty Name="Shedule_Id" ColumnName="Shedule_Id" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GenerateQRCodeKey" FunctionName="PupilBookModel.Store.GenerateQRCodeKey" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
