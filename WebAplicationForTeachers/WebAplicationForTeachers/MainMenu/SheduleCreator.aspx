@@ -9,8 +9,8 @@
             <hr />
             <asp:Table runat="server">
                 <asp:TableRow>
-                    <asp:TableCell ColumnSpan="2">Start Time</asp:TableCell>
-                    <asp:TableCell ColumnSpan="2">End Time</asp:TableCell>
+                    <asp:TableCell ColumnSpan="2">Začátek vyučovací hodiny</asp:TableCell>
+                    <asp:TableCell ColumnSpan="2">Konec vyučovací hodiny</asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
@@ -88,7 +88,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
-                    <asp:TableCell ColumnSpan="4"><asp:Button runat="server" OnClick="AddTimeSpan_Click" Text="Add Timespan to shedule" CssClass="form-control"/></asp:TableCell>
+                    <asp:TableCell ColumnSpan="4"><asp:Button runat="server" OnClick="AddTimeSpan_Click" Text="Přidat vyučovací hodinu" CssClass="form-control"/></asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
             <hr />
@@ -97,8 +97,8 @@
             <asp:GridView ID="gvSheduleTimes" runat="server" DataSourceID="sdsSheduleTimes" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Id" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:BoundField DataField="BeginTime" HeaderText="BeginTime" SortExpression="BeginTime" />
-                    <asp:BoundField DataField="EndTime" HeaderText="EndTime" SortExpression="EndTime" />
+                    <asp:BoundField DataField="BeginTime" HeaderText="Začátek vyučovací hodiny" SortExpression="BeginTime" />
+                    <asp:BoundField DataField="EndTime" HeaderText="Konec vyučovací hodiny" SortExpression="EndTime" />
                     <asp:BoundField DataField="Shedule_Id" HeaderText="Shedule_Id" SortExpression="Shedule_Id" Visible="False" />
                     <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
                     <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />
@@ -137,22 +137,29 @@
             <h1>Shedule builder for year
                 <asp:Label ID="lYear" runat="server"></asp:Label></h1>
             <hr />
-            <h3>Do you want use odd/even weeks system?</h3>
+            <h3>Budete používat rozvrh hodin využívající rozdělení na sudé a liché týdny?</h3>
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button ID="Button1" runat="server" Text="Yes" OnClick="oddEvenYes_Click" CssClass="form-control" BackColor="LightGreen" />
+                        <asp:Button ID="Button1" runat="server" Text="Ano" OnClick="oddEvenYes_Click" CssClass="form-control" BackColor="LightGreen" />
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Button ID="Button2" runat="server" Text="No" OnClick="oddEvenNo_Click" CssClass="form-control" BackColor="MistyRose" />
+                        <asp:Button ID="Button2" runat="server" Text="Ne" OnClick="oddEvenNo_Click" CssClass="form-control" BackColor="MistyRose" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
         </asp:View>
         <asp:View ID="SheduleAdvanced" runat="server">
-            <asp:HiddenField ID="ddlCounterHidden" runat="server" /> 
 
             <asp:Table ID="SheduleTable" runat="server" Width="100%" CssClass="table" >
+            </asp:Table>
+        </asp:View>
+        <asp:View ID="SheduleAdvancedDouble" runat="server">
+            <h2>Kalendář pro sudý týden</h2>
+            <asp:Table ID="SheduleTableEven" runat="server" Width="100%" CssClass="table" >
+            </asp:Table>
+            <h2>Kalendář pro lichý týden</h2>
+            <asp:Table ID="SheduleTableOdd" runat="server" Width="100%" CssClass="table" >
             </asp:Table>
         </asp:View>
     </asp:MultiView>

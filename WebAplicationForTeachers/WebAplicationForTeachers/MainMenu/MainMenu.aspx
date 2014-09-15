@@ -13,24 +13,24 @@
                     <asp:TableCell>
                         <asp:TextBox ID="TextBoxAddYear" runat="server" CssClass="form-control"></asp:TextBox>
                     </asp:TableCell>
+                   
                     <asp:TableCell>
-                        <asp:Button ID="ButtonAddYear" runat="server" Text="Add School Year" OnClick="AddYear_Click" CssClass="form-control" />
+                        <asp:Button ID="ButtonAddYear" runat="server" Text="Přidat školní rok" OnClick="AddYear_Click" CssClass="form-control" />
                     </asp:TableCell>
                 </asp:TableRow>
-                
             </asp:Table>
             <hr />
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Shedule creator" CssClass="form-control" OnClick="GoToSheduleCreator_Click" />
+                        <asp:Button runat="server" Text="Upravit rozvrh hodin" CssClass="form-control" OnClick="GoToSheduleCreator_Click" />
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                        <asp:Button runat="server" Text="Upravit seznam studentů a tříd" OnClick="GoToView2_Click" CssClass="form-control"/>
                     </asp:TableCell>
                     
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                        <asp:Button runat="server" Text="Upravit předměty" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -38,50 +38,51 @@
         </asp:View>
 
         <asp:View ID="ViewStudyGroups" runat="server">
-            <h2>School Year
-        <asp:Label ID="LabelYear" runat="server" Text="Label"></asp:Label>
+            <h2>Školní rok
+        <asp:Label ID="LabelYear" runat="server" Text=""></asp:Label>
             </h2>
             
-            
+            <hr />
             <p class="text-danger">
                 <asp:Literal runat="server" ID="ErrorMessage" />
             </p>
             <div class="form-horizontal">
-                <h4>Now we create list of your class rooms</h4>
+                <h4>Nyní můžete editovat seznam tříd</h4>
                 <hr />
                 <div class="form-group">
-                    <asp:Label runat="server" AssociatedControlID="ClassRoomShort" CssClass="col-md-2 control-label" ToolTip="Its unique name of class. Like 5.B">Classroom short name for Shedule</asp:Label>
+                    <asp:Label runat="server" AssociatedControlID="ClassRoomShort" CssClass="col-md-2 control-label" ToolTip="Zkrácený název třídy např: 5.B">Název třídy zkratka</asp:Label>
                     <div class="col-md-10">
-                        <asp:TextBox runat="server" ID="ClassRoomShort" CssClass="form-control" TextMode="SingleLine" ToolTip="Its unique name of class. Like 5.B" />
+                        <asp:TextBox runat="server" ID="ClassRoomShort" CssClass="form-control" TextMode="SingleLine" ToolTip="Zkrácený název třídy např: 5.B" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" AssociatedControlID="ClassRoom" CssClass="col-md-2 control-label" ToolTip="Here you can place what you want">Classroom name</asp:Label>
+                    <asp:Label runat="server" AssociatedControlID="ClassRoom" CssClass="col-md-2 control-label" ToolTip="Celý název třídy. Tento údaj není povinný">Název třídy</asp:Label>
                     <div class="col-md-10">
-                        <asp:TextBox runat="server" ID="ClassRoom" CssClass="form-control" TextMode="SingleLine" ToolTip="Here you can place what you want" />
+                        <asp:TextBox runat="server" ID="ClassRoom" CssClass="form-control" TextMode="SingleLine" ToolTip="Celý název třídy. Tento údaj není povinný" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" AssociatedControlID="ClassDesription" CssClass="col-md-2 control-label" ToolTip="Its unique name of class. Like 5.B">Classroom description</asp:Label>
+                    <asp:Label runat="server" AssociatedControlID="ClassDesription" CssClass="col-md-2 control-label" ToolTip="Zde si můžete zapsat libovolné poznámky.">Poznámky</asp:Label>
                     <div class="col-md-10">
-                        <asp:TextBox runat="server" ID="ClassDesription" CssClass="form-control" TextMode="MultiLine" ToolTip="Its unique name of class. Like 5.B" />
+                        <asp:TextBox runat="server" ID="ClassDesription" CssClass="form-control" TextMode="MultiLine" ToolTip="Zde si můžete zapsat libovolné poznámky." />
 
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <asp:Button runat="server" Text="Add Class" CssClass="btn btn-default" OnClick="Add_Click" />
+                        <asp:Button runat="server" Text="Přidat třídu" CssClass="btn btn-default" OnClick="Add_Click" />
                     </div>
                 </div>
             </div>
-
+            <hr />
+            <h3>Pro editaci studentů vyberte třídu</h3>
             <asp:GridView ID="GridViewClassRooms" runat="server" DataSourceID="SqlDataSourceClassRooms" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Id" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridViewClassRooms_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" InsertVisible="False" Visible="False" />
-                    <asp:BoundField DataField="GroupNameShort" HeaderText="Group Name Short" SortExpression="GroupNameShort" />
-                    <asp:BoundField DataField="GroupName" HeaderText="Group Name" SortExpression="GroupName" />
-                    <asp:BoundField DataField="GroupDescription" HeaderText="Group Description" SortExpression="GroupDescription" />
+                    <asp:BoundField DataField="GroupNameShort" HeaderText="Zkrácený název" SortExpression="GroupNameShort" />
+                    <asp:BoundField DataField="GroupName" HeaderText="Název" SortExpression="GroupName" />
+                    <asp:BoundField DataField="GroupDescription" HeaderText="Poznámky" SortExpression="GroupDescription" />
                     <asp:BoundField DataField="SchoolYear_Id" HeaderText="SchoolYear_Id" SortExpression="SchoolYear_Id" Visible="False" />
                     <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
                 </Columns>
@@ -106,7 +107,7 @@
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                        <asp:Button runat="server" Text="Změnit školní rok" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
                     </asp:TableCell>
                     <%--<asp:TableCell>
                         <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
@@ -115,7 +116,7 @@
                         <asp:Button runat="server" Text="Go to ClassRooms" CssClass="form-control" OnClick="GoToStudyGroups_Click" />
                     </asp:TableCell>--%>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                        <asp:Button runat="server" Text="Upravit předměty" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -124,30 +125,30 @@
 
         <asp:View ID="ViewStudyGroup" runat="server">
             <div class="form-horizontal">
-                <h4>Add Student to
-            <asp:Label ID="LabelStudyGroupName" runat="server" Text="Label"></asp:Label>
-                    in year
+                <h4>Přidat studenta do skupiny 
+            <asp:Label ID="LabelStudyGroupName" runat="server" Text=""></asp:Label>
+                    ve školním roce 
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 </h4>
 
                 <hr />
                 <asp:ValidationSummary runat="server" CssClass="text-danger" />
                 <div class="form-group">
-                    <asp:Label runat="server" AssociatedControlID="FirstName" CssClass="col-md-2 control-label" ToolTip="Dont need tooltip :)">First Name</asp:Label>
+                    <asp:Label runat="server" AssociatedControlID="FirstName" CssClass="col-md-2 control-label" ToolTip="K tomuhle zřejmě nepotřebujete nápovědu">First Name</asp:Label>
                     <div class="col-md-10">
-                        <asp:TextBox runat="server" ID="FirstName" CssClass="form-control" TextMode="SingleLine" ToolTip="Dont need tooltip :)" />
+                        <asp:TextBox runat="server" ID="FirstName" CssClass="form-control" TextMode="SingleLine" ToolTip="K tomuhle zřejmě nepotřebujete nápovědu" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" AssociatedControlID="LastName" CssClass="col-md-2 control-label" ToolTip="Dont need tooltip :)">Last Name</asp:Label>
+                    <asp:Label runat="server" AssociatedControlID="LastName" CssClass="col-md-2 control-label" ToolTip="K tomuhle zřejmě nepotřebujete nápovědu">Last Name</asp:Label>
                     <div class="col-md-10">
-                        <asp:TextBox runat="server" ID="LastName" CssClass="form-control" TextMode="SingleLine" ToolTip="Dont need tooltip :)" />
+                        <asp:TextBox runat="server" ID="LastName" CssClass="form-control" TextMode="SingleLine" ToolTip="K tomuhle zřejmě nepotřebujete nápovědu" />
 
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <asp:Button runat="server" Text="Add Student" CssClass="btn btn-default" OnClick="Add_Student_Click" />
+                        <asp:Button runat="server" Text="Přidat studenta" CssClass="btn btn-default" OnClick="Add_Student_Click" />
                     </div>
                 </div>
             </div>
@@ -158,8 +159,8 @@
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
-                    <asp:BoundField DataField="LastName" HeaderText="Last Name" SortExpression="LastName" />
-                    <asp:BoundField DataField="FirstName" HeaderText="First Name" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="Příjmení" SortExpression="LastName" />
+                    <asp:BoundField DataField="FirstName" HeaderText="Jméno" SortExpression="FirstName" />
                     <asp:BoundField DataField="StudyGroup_Id" HeaderText="StudyGroup_Id" SortExpression="StudyGroup_Id" Visible="False" />
                     <asp:CommandField ButtonType="Button" ShowEditButton="True" />
                 </Columns>
@@ -197,14 +198,14 @@
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                        <asp:Button runat="server" Text="Změnit školní rok" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                        <asp:Button runat="server" Text="Upravit třídu" OnClick="GoToView2_Click" CssClass="form-control"/>
                     </asp:TableCell>
                     
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Subjects menu" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
+                        <asp:Button runat="server" Text="Upravit předměty" CssClass="form-control" OnClick="GotoSubjectGroups1_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -213,8 +214,8 @@
         <asp:View ID="ViewStudySubjects" runat="server">
             <asp:Table runat="server">
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell>Choose study category</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>New study Category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Vyberty předmět</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Nový předmět</asp:TableHeaderCell>
                     <asp:TableHeaderCell></asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
@@ -229,8 +230,8 @@
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell>Choose study Sub category</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>New study Sub Category</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Vyberte podkategorii předmětu</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Nová podkategorie předmětu</asp:TableHeaderCell>
                     <asp:TableHeaderCell></asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
@@ -251,8 +252,8 @@
                     <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
                     <asp:BoundField DataField="StudySubject_Id" HeaderText="StudySubject_Id" SortExpression="StudySubject_Id" Visible="False" />
                     <asp:BoundField DataField="Expr1" HeaderText="StudySubject_id_PrimaryKey" InsertVisible="False" ReadOnly="True" SortExpression="Expr1" Visible="False" />
-                    <asp:BoundField DataField="Expr2" HeaderText="Name of Subject" SortExpression="Expr2" />
-                    <asp:BoundField DataField="Name" HeaderText="Name of Sub subject" SortExpression="Name" />
+                    <asp:BoundField DataField="Expr2" HeaderText="Název předmětu" SortExpression="Expr2" />
+                    <asp:BoundField DataField="Name" HeaderText="Název podkategorie předmětu" SortExpression="Name" />
                     <asp:BoundField DataField="SchoolYear_Id" HeaderText="SchoolYear_Id" SortExpression="SchoolYear_Id" Visible="False" />
                 </Columns>
                 <FooterStyle BackColor="#CCCC99" />
@@ -286,10 +287,10 @@
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Change School Year" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
+                        <asp:Button runat="server" Text="Změnit školní rok" CssClass="form-control" OnClick="ChangeShoolYear_Click" />
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Button runat="server" Text="Go to Study groups menu" OnClick="GoToView2_Click" CssClass="form-control"/>
+                        <asp:Button runat="server" Text="Upravit třídy" OnClick="GoToView2_Click" CssClass="form-control"/>
                     </asp:TableCell>
                     <%--<asp:TableCell>
                         <asp:Button runat="server" Text="Go to ClassRooms" CssClass="form-control" OnClick="GoToStudyGroups_Click" />

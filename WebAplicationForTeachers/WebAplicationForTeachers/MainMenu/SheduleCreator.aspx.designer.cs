@@ -148,15 +148,6 @@ namespace WebAplicationForTeachers {
         protected global::System.Web.UI.WebControls.View SheduleAdvanced;
         
         /// <summary>
-        /// ddlCounterHidden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ddlCounterHidden;
-        
-        /// <summary>
         /// SheduleTable control.
         /// </summary>
         /// <remarks>
@@ -164,5 +155,32 @@ namespace WebAplicationForTeachers {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table SheduleTable;
+        
+        /// <summary>
+        /// SheduleAdvancedDouble control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View SheduleAdvancedDouble;
+        
+        /// <summary>
+        /// SheduleTableEven control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table SheduleTableEven;
+        
+        /// <summary>
+        /// SheduleTableOdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table SheduleTableOdd;
     }
 }

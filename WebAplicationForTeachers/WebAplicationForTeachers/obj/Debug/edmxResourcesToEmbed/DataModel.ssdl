@@ -49,7 +49,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Day" Type="tinyint" Nullable="false" />
     <Property Name="Shedule_Id" Type="int" Nullable="false" />
-    <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
+    <Property Name="SubjectSubCategory_Id" Type="int" />
     <Property Name="StudyGroup_Id" Type="int" />
     <Property Name="Even" Type="bit" />
     <Property Name="SheduleHoursSet_ID" Type="int" Nullable="false" />
@@ -151,7 +151,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SheduleItemSubjectSubCategory">
-    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
+    <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="0..1" />
     <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubjectSubCategorySet">

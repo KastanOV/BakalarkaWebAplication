@@ -438,7 +438,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Day" Type="Byte" Nullable="false" />
     <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
-    <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+    <Property Name="SubjectSubCategory_Id" Type="Int32" />
     <Property Name="StudyGroup_Id" Type="Int32" />
     <Property Name="Even" Type="Boolean" />
     <Property Name="SheduleHoursSet_ID" Type="Int32" Nullable="false" />
@@ -460,7 +460,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SheduleItemSubjectSubCategory">
-    <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />
+    <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="0..1" />
     <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubjectSubCategorySet">

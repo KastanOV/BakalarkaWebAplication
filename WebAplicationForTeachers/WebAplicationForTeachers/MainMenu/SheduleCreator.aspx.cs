@@ -14,7 +14,7 @@ namespace WebAplicationForTeachers
     {
         PupilBookEntities db = new PupilBookEntities();
         int YearID = -1;
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e) 
         {
 
             if (!IsPostBack)
@@ -54,11 +54,11 @@ namespace WebAplicationForTeachers
                     {
                         if (i.Period == "S")
                         {
-                            ddlChangeShedule.Items.Add(new ListItem("Summer semester", i.Id.ToString()));
+                            ddlChangeShedule.Items.Add(new ListItem("Letní semestr", i.Id.ToString()));
                         }
                         else
                         {
-                            ddlChangeShedule.Items.Add(new ListItem("Winter semester", i.Id.ToString()));
+                            ddlChangeShedule.Items.Add(new ListItem("Zimní semestr", i.Id.ToString()));
                         }
                     }
 
@@ -91,7 +91,6 @@ namespace WebAplicationForTeachers
                 string tmp = Server.UrlDecode(Request.QueryString["SheduleItemEdit"]);
                 if (tmp == "true")
                 {
-                    MultiView1.ActiveViewIndex = 2;
                     LoadShedule();
                 }
             }
@@ -110,10 +109,12 @@ namespace WebAplicationForTeachers
             //Testing if User using for this Shedule Even/ODD System
             if (shedule.EvenWeek == true)
             {
-                // Tady se bude generovat dvojitý kalendar pro sudé a liché týdny
+                MultiView1.ActiveViewIndex = 3;
+                CreateDoubleCalendar(SheduleID);
             }
             else
             {
+                MultiView1.ActiveViewIndex = 2;
                 CreateSimpleCalendar(SheduleID);
             }
         }
@@ -199,9 +200,63 @@ namespace WebAplicationForTeachers
             gvSheduleTimes.DataBind();
 
         }
+        private void CreateDoubleCalendar(int SheduleID)
+        {
+            var times = from i in db.SheduleHoursSet
+                        where i.Shedule_Id == SheduleID
+                        select i;
+            int YearID = Int32.Parse(Server.UrlDecode(Request.QueryString["YearID"]));
+            var Subjects = from i in db.SubjectSubCategorySet
+                           join j in db.StudySubjectSet on i.StudySubject_Id equals j.Id
+                           where j.SchoolYear_Id == YearID
+                           select i;
+            var StudyGroup = from i in db.StudyGroupSet
+                             where i.SchoolYear_Id == YearID
+                             select i;
+
+            TableRow rowHeader = new TableRow();
+            TableCell FirstCell = new TableCell();
+            FirstCell.CssClass = "Form-Control";
+            FirstCell.Text = "<b>Rozvrh Hodin<b/>";
+
+            rowHeader.Cells.Add(FirstCell);
+
+            foreach (var i in times)
+            {
+                TableCell cell = new TableCell();
+                cell.CssClass = "Form-Control";
+                cell.Text = String.Format("{0}<br/>{1}", i.BeginTime.ToString(), i.EndTime.ToString());
+                rowHeader.Cells.Add(cell);
+                SheduleTableEven.Rows.Add(rowHeader);
+                SheduleTableOdd.Rows.Add(rowHeader);
+            }
+
+            for (int j = 0; j < 5; j++)
+            {
+                TableCell Days = new TableCell();
+                Days.CssClass = "Form-Control";
+                Days.Text = MainMenu.Days.GetDay(j);
+                TableRow rowEven = new TableRow();
+                TableRow rowOdd = new TableRow();
+                rowEven.Cells.Add(Days);
+                rowOdd.Cells.Add(Days);
+
+                foreach (var i in times)
+                {
+                    TableCell cellEven = new TableCell();
+                    TableCell cellOdd = new TableCell();
+                    SheduleButtons buttonEven = new SheduleButtons(YearID, i.Id, j, SheduleID, true);
+                    SheduleButtons buttonOdd = new SheduleButtons(YearID, i.Id, j, SheduleID, false);
+                    cellEven.Controls.Add(buttonEven);
+                    cellOdd.Controls.Add(buttonOdd);
+                }
+                SheduleTableEven.Rows.Add(rowEven);
+                SheduleTableOdd.Rows.Add(rowOdd);
+            }
+
+        }
         private void CreateSimpleCalendar(int SheduleID)
         {
-
             var times = from i in db.SheduleHoursSet
                         where i.Shedule_Id == SheduleID
                         select i;
@@ -241,7 +296,7 @@ namespace WebAplicationForTeachers
                 {
 
                     TableCell cell1 = new TableCell();
-                    SheduleButtons button = new SheduleButtons(YearID, i.Id, j, SheduleID);
+                    SheduleButtons button = new SheduleButtons(YearID, i.Id, j, SheduleID, null);
                     cell1.Controls.Add(button);
                     row.Cells.Add(cell1);
                 }

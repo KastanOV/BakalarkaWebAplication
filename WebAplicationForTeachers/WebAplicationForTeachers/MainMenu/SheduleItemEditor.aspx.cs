@@ -178,8 +178,12 @@ namespace WebAplicationForTeachers
                     SheduleItemSet SheduleItem = (from i in db.SheduleItemSet
                                                   where i.Id == _SheduleItemID
                                                   select i).First();
-                    SheduleItem.StudyGroup_Id = Int32.Parse(ddlStudyGroup.SelectedValue);
-                    SheduleItem.SubjectSubCategory_Id = Int32.Parse(ddlSubject.SelectedValue);
+                    int? StudyGroupTmp = Int32.Parse(ddlStudyGroup.SelectedValue);
+                    int? SubjectTmp = Int32.Parse(ddlSubject.SelectedValue);
+                    if (StudyGroupTmp == -1) StudyGroupTmp = null;
+                    if (SubjectTmp == -1) SubjectTmp = null;
+                    SheduleItem.StudyGroup_Id = StudyGroupTmp;
+                    SheduleItem.SubjectSubCategory_Id = SubjectTmp;
                     db.SaveChanges();
                 }
                 Response.Redirect("~/MainMenu/SheduleCreator?YearID=" + Server.UrlDecode(Request.QueryString["Year"]) + "&SheduleItemEdit=true");

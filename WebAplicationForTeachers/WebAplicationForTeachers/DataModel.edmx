@@ -54,7 +54,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Day" Type="tinyint" Nullable="false" />
           <Property Name="Shedule_Id" Type="int" Nullable="false" />
-          <Property Name="SubjectSubCategory_Id" Type="int" Nullable="false" />
+          <Property Name="SubjectSubCategory_Id" Type="int" />
           <Property Name="StudyGroup_Id" Type="int" />
           <Property Name="Even" Type="bit" />
           <Property Name="SheduleHoursSet_ID" Type="int" Nullable="false" />
@@ -156,7 +156,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SheduleItemSubjectSubCategory">
-          <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="1" />
+          <End Role="SubjectSubCategorySet" Type="Self.SubjectSubCategorySet" Multiplicity="0..1" />
           <End Role="SheduleItemSet" Type="Self.SheduleItemSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubjectSubCategorySet">
@@ -898,7 +898,7 @@
             <End Role="StudyGroupSet" EntitySet="StudyGroupSet" />
             <End Role="SheduleItemSet" EntitySet="SheduleItemSet" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="SheduleItemSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -906,7 +906,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Day" Type="Byte" Nullable="false" />
           <Property Name="Shedule_Id" Type="Int32" Nullable="false" />
-          <Property Name="SubjectSubCategory_Id" Type="Int32" Nullable="false" />
+          <Property Name="SubjectSubCategory_Id" Type="Int32" />
           <Property Name="StudyGroup_Id" Type="Int32" />
           <Property Name="Even" Type="Boolean" />
           <Property Name="SheduleHoursSet_ID" Type="Int32" Nullable="false" />
@@ -928,7 +928,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SheduleItemSubjectSubCategory">
-          <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="1" />
+          <End Type="PupilBookModel.SubjectSubCategorySet" Role="SubjectSubCategorySet" Multiplicity="0..1" />
           <End Type="PupilBookModel.SheduleItemSet" Role="SheduleItemSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubjectSubCategorySet">

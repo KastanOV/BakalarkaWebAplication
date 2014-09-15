@@ -17,7 +17,7 @@ namespace WebAplicationForTeachers
         public int Id { get; set; }
         public byte Day { get; set; }
         public int Shedule_Id { get; set; }
-        public int SubjectSubCategory_Id { get; set; }
+        public Nullable<int> SubjectSubCategory_Id { get; set; }
         public Nullable<int> StudyGroup_Id { get; set; }
         public Nullable<bool> Even { get; set; }
         public int SheduleHoursSet_ID { get; set; }

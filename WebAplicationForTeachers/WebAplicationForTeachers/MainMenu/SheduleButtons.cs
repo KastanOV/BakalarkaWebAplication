@@ -10,9 +10,10 @@ namespace WebAplicationForTeachers.MainMenu
 {
     public class SheduleButtons : HyperLink
     {
-        public SheduleButtons(int YearID, int TimeID, int Day, int SheduleID)
+        public SheduleButtons(int YearID, int TimeID, int Day, int SheduleID, bool? Even)
         {
             int? SheduleItemID = null;
+            
             using (PupilBookEntities db = new PupilBookEntities())
             {
                  
@@ -22,8 +23,9 @@ namespace WebAplicationForTeachers.MainMenu
                                        join SubcatItemSI in db.SubjectSubCategorySet on SI.SubjectSubCategory_Id equals SubcatItemSI.Id
                                        join Subject in db.StudySubjectSet on SubcatItemSI.StudySubject_Id equals Subject.Id
                                        join StudyGroupSI in db.StudyGroupSet on SI.StudyGroup_Id equals StudyGroupSI.Id
-                                       where SI.Shedule_Id == SheduleID && SI.Day == Day && SI.SheduleHoursSet_ID == TimeID && SI.Even == null
+                                       where SI.Shedule_Id == SheduleID && SI.Day == Day && SI.SheduleHoursSet_ID == TimeID && SI.Even == Even
                                        select new { SubjectName = Subject.Name, SheduleItemID = SI.Id, SheduleID = SI.Shedule_Id, SubjectID = SI.SubjectSubCategory_Id, StudyGroupID = SI.StudyGroup_Id, SubSubjectName = SubcatItemSI.Name, StudyGroupName = StudyGroupSI.GroupNameShort }).First();
+                    
                     if (SheduleItem.SubjectID == -1 || SheduleItem.StudyGroupID == -1)
                     {
                         this.BackColor = Color.LightGreen;
@@ -35,7 +37,6 @@ namespace WebAplicationForTeachers.MainMenu
                         this.BackColor = Color.MistyRose;
                         this.Text = SheduleItem.StudyGroupName + " <br /> " + SheduleItem.SubjectName + " <br /> " + SheduleItem.SubSubjectName;
                     }
-                    
                 }
 
                 catch

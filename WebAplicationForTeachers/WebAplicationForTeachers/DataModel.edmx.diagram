@@ -31,7 +31,7 @@
         <AssociationConnector Association="PupilBookModel.FK_SchoolYearStudySubject" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_StudySubjectSubjectSubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="PupilBookModel.FK_UserSchoolYear" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PupilBookModel.SheduleItemSet" Width="1.5" PointX="0.5" PointY="10.375" />
+        <EntityTypeShape EntityType="PupilBookModel.SheduleItemSet" Width="1.5" PointX="0.5" PointY="10.125" />
         <AssociationConnector Association="PupilBookModel.FK__SheduleIt__Shedu__01142BA1" />
         <AssociationConnector Association="PupilBookModel.FK_SheduleItemSubjectSubCategory" />
         <AssociationConnector Association="PupilBookModel.FK_SchoolSheduleSheduleItem" />
