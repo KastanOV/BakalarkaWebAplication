@@ -45,12 +45,14 @@ namespace WebAplicationForTeachers.MainMenu
                     this.Text = "Volná <br /> hodina";
                 }
             }
-            
+            string EvenTmp = "null";
+            if (Even != null) EvenTmp = Even.ToString();
             StringBuilder url = new StringBuilder();
             url.Append("~/MainMenu/SheduleItemEditor.aspx?Year=").Append(YearID);
             url.Append("&SheduleHoursSet_ID=").Append(TimeID);
             url.Append("&Day=").Append(Day);
             url.Append("&SheduleID=").Append(SheduleID);
+            url.Append("&Even=").Append(EvenTmp);
             if (SheduleItemID != null)
             {
                 url.Append("&SheduleItemID=").Append(SheduleItemID);

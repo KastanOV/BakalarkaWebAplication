@@ -31,7 +31,6 @@ namespace WebAplicationForTeachers
                 }
                 catch
                 {
-
                     Response.Redirect("~/");
                 }
                 bool existShedule = (from i in db.SheduleSet
@@ -61,9 +60,9 @@ namespace WebAplicationForTeachers
                             ddlChangeShedule.Items.Add(new ListItem("Zimní semestr", i.Id.ToString()));
                         }
                     }
-
+                    SelectView(null);
                 }
-                SelectView(null);
+                
             }
         }
         private void SelectView(int? View)
@@ -77,47 +76,14 @@ namespace WebAplicationForTeachers
                         break;
                     case 1: MultiView1.ActiveViewIndex = 1;
                         break;
-                    case 2: MultiView1.ActiveViewIndex = 2;
-                        LoadShedule();
-                        break;
                 }
             }
             else
             {
                 MultiView1.ActiveViewIndex = 0;
             }
-            try
-            {
-                string tmp = Server.UrlDecode(Request.QueryString["SheduleItemEdit"]);
-                if (tmp == "true")
-                {
-                    LoadShedule();
-                }
-            }
-            catch
-            {
-                
-            }
-
         }
-        private void LoadShedule()
-        {
-            int SheduleID = Int32.Parse(ddlChangeShedule.SelectedValue);
-            var shedule = (from i in db.SheduleSet
-                           where i.Id == SheduleID
-                           select i).First();
-            //Testing if User using for this Shedule Even/ODD System
-            if (shedule.EvenWeek == true)
-            {
-                MultiView1.ActiveViewIndex = 3;
-                CreateDoubleCalendar(SheduleID);
-            }
-            else
-            {
-                MultiView1.ActiveViewIndex = 2;
-                CreateSimpleCalendar(SheduleID);
-            }
-        }
+        
         protected void oddEvenYes_Click(object sender, EventArgs e)
         {
             YearID = Int32.Parse(Server.UrlDecode(Request.QueryString["YearID"]));
@@ -136,7 +102,7 @@ namespace WebAplicationForTeachers
             db.SheduleSet.Add(item1);
             db.SheduleSet.Add(item2);
             db.SaveChanges();
-            SelectView(0);
+            Response.Redirect("~/MainMenu/SheduleCreator.aspx?YearID=" + Server.UrlDecode(Request.QueryString["YearID"]));
         }
         protected void oddEvenNo_Click(object sender, EventArgs e)
         {
@@ -156,7 +122,7 @@ namespace WebAplicationForTeachers
             db.SheduleSet.Add(item1);
             db.SheduleSet.Add(item2);
             db.SaveChanges();
-            SelectView(0);
+            Response.Redirect("~/MainMenu/SheduleCreator.aspx?YearID=" + Server.UrlDecode(Request.QueryString["YearID"]));
         }
         protected void AddTimeSpan_Click(object sender, EventArgs e)
         {
@@ -200,113 +166,10 @@ namespace WebAplicationForTeachers
             gvSheduleTimes.DataBind();
 
         }
-        private void CreateDoubleCalendar(int SheduleID)
-        {
-            var times = from i in db.SheduleHoursSet
-                        where i.Shedule_Id == SheduleID
-                        select i;
-            int YearID = Int32.Parse(Server.UrlDecode(Request.QueryString["YearID"]));
-            var Subjects = from i in db.SubjectSubCategorySet
-                           join j in db.StudySubjectSet on i.StudySubject_Id equals j.Id
-                           where j.SchoolYear_Id == YearID
-                           select i;
-            var StudyGroup = from i in db.StudyGroupSet
-                             where i.SchoolYear_Id == YearID
-                             select i;
-
-            TableRow rowHeader = new TableRow();
-            TableCell FirstCell = new TableCell();
-            FirstCell.CssClass = "Form-Control";
-            FirstCell.Text = "<b>Rozvrh Hodin<b/>";
-
-            rowHeader.Cells.Add(FirstCell);
-
-            foreach (var i in times)
-            {
-                TableCell cell = new TableCell();
-                cell.CssClass = "Form-Control";
-                cell.Text = String.Format("{0}<br/>{1}", i.BeginTime.ToString(), i.EndTime.ToString());
-                rowHeader.Cells.Add(cell);
-                SheduleTableEven.Rows.Add(rowHeader);
-                SheduleTableOdd.Rows.Add(rowHeader);
-            }
-
-            for (int j = 0; j < 5; j++)
-            {
-                TableCell Days = new TableCell();
-                Days.CssClass = "Form-Control";
-                Days.Text = MainMenu.Days.GetDay(j);
-                TableRow rowEven = new TableRow();
-                TableRow rowOdd = new TableRow();
-                rowEven.Cells.Add(Days);
-                rowOdd.Cells.Add(Days);
-
-                foreach (var i in times)
-                {
-                    TableCell cellEven = new TableCell();
-                    TableCell cellOdd = new TableCell();
-                    SheduleButtons buttonEven = new SheduleButtons(YearID, i.Id, j, SheduleID, true);
-                    SheduleButtons buttonOdd = new SheduleButtons(YearID, i.Id, j, SheduleID, false);
-                    cellEven.Controls.Add(buttonEven);
-                    cellOdd.Controls.Add(buttonOdd);
-                }
-                SheduleTableEven.Rows.Add(rowEven);
-                SheduleTableOdd.Rows.Add(rowOdd);
-            }
-
-        }
-        private void CreateSimpleCalendar(int SheduleID)
-        {
-            var times = from i in db.SheduleHoursSet
-                        where i.Shedule_Id == SheduleID
-                        select i;
-            int YearID = Int32.Parse(Server.UrlDecode(Request.QueryString["YearID"]));
-            var Subjects = from i in db.SubjectSubCategorySet
-                           join j in db.StudySubjectSet on i.StudySubject_Id equals j.Id
-                           where j.SchoolYear_Id == YearID
-                           select i;
-            var StudyGroup = from i in db.StudyGroupSet
-                             where i.SchoolYear_Id == YearID
-                             select i;
-
-            TableRow rowHeader = new TableRow();
-            TableCell FirstCell = new TableCell();
-            FirstCell.CssClass = "Form-Control";
-            FirstCell.Text = "<b>Rozvrh Hodin<b/>";
-
-            rowHeader.Cells.Add(FirstCell);
-
-            foreach (var i in times)
-            {
-                TableCell cell = new TableCell();
-                cell.CssClass = "Form-Control";
-                cell.Text = String.Format("{0}<br/>{1}", i.BeginTime.ToString(), i.EndTime.ToString());
-                rowHeader.Cells.Add(cell);
-                SheduleTable.Rows.Add(rowHeader);
-            }
-            for (int j = 0; j < 5; j++)
-            {
-                TableCell Days = new TableCell();
-                Days.CssClass = "Form-Control";
-                Days.Text = MainMenu.Days.GetDay(j);
-                TableRow row = new TableRow();
-                row.Cells.Add(Days);
-
-                foreach (var i in times)
-                {
-
-                    TableCell cell1 = new TableCell();
-                    SheduleButtons button = new SheduleButtons(YearID, i.Id, j, SheduleID, null);
-                    cell1.Controls.Add(button);
-                    row.Cells.Add(cell1);
-                }
-
-                SheduleTable.Rows.Add(row);
-            }
-        }
+        
         protected void GoToSheduleCreator_Click(object sender, EventArgs e)
         {
-            SelectView(2);
+            Response.Redirect("~/MainMenu/SheduleEditor.aspx?SheduleID=" + ddlChangeShedule.SelectedValue + "&YearID=" + Server.UrlDecode(Request.QueryString["YearID"]));
         }
     }
 }

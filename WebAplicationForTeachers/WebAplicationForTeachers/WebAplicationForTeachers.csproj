@@ -217,6 +217,7 @@
     <Content Include="MainMenu\MainMenu.aspx" />
     <Content Include="MainMenu\SheduleCreator.aspx" />
     <Content Include="MainMenu\SheduleItemEditor.aspx" />
+    <Content Include="MainMenu\SheduleEditor.aspx" />
     <EntityDeploy Include="DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
@@ -524,6 +525,13 @@
     </Compile>
     <Compile Include="MainMenu\SheduleItemEditor.aspx.designer.cs">
       <DependentUpon>SheduleItemEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu\SheduleEditor.aspx.cs">
+      <DependentUpon>SheduleEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMenu\SheduleEditor.aspx.designer.cs">
+      <DependentUpon>SheduleEditor.aspx</DependentUpon>
     </Compile>
     <Compile Include="YearSet.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

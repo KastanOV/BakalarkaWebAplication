@@ -66,3 +66,4 @@ c:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\WebAplicationForTea
 c:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\WebAplicationForTeachers\WebAplicationForTeachers\bin\Microsoft.Owin.Security.OAuth.xml
 c:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\WebAplicationForTeachers\WebAplicationForTeachers\obj\Debug\WebAplicationForTeachers.dll
 c:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\WebAplicationForTeachers\WebAplicationForTeachers\obj\Debug\WebAplicationForTeachers.pdb
+C:\Users\KastanNotas\Documents\GitHub\BakalarkaWebAplication\WebAplicationForTeachers\WebAplicationForTeachers\obj\Debug\WebAplicationForTeachers.csprojResolveAssemblyReference.cache

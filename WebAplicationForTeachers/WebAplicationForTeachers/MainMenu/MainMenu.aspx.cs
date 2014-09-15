@@ -35,13 +35,14 @@ namespace WebAplicationForTeachers
                 {
                     LabelYearHeader.Text = "Aktuální školní rok je " + FirstItem.Name;
                     LabelYear.Text = FirstItem.Name;
-                    DropDownListYears.Items.Insert(0, new ListItem(FirstItem.Name, FirstItem.Id.ToString()));
+                    DropDownListYears.Items.Add(new ListItem(FirstItem.Name, FirstItem.Id.ToString()));
+                    
                     var AnotherItem = from i in db.YearSet
                                       where i.User_Id == UserID && i.ActualYear == false
                                       select new { i.Name, i.Id };
                     foreach (var i in AnotherItem)
                     {
-                        DropDownListYears.Items.Add(new ListItem(FirstItem.Name, FirstItem.Id.ToString()));
+                        DropDownListYears.Items.Add(new ListItem(i.Name, i.Id.ToString()));
                     }
                 }
 
@@ -61,12 +62,21 @@ namespace WebAplicationForTeachers
                 YearSet year = new YearSet()
                 {
                     Name = TextBoxAddYear.Text,
-                    
                     ActualYear = true,
                     User_Id = User.Identity.GetUserId()
                 };
+                string UserId = User.Identity.GetUserId();
+                
+                var items = from i in db.YearSet
+                            where i.User_Id == UserId
+                            select i;
+                foreach (var item in items)
+                {
+                    item.ActualYear = false;
+                }
                 db.YearSet.Add(year);
                 db.SaveChanges();
+                TextBoxAddYear.Text = "";
                 DropDownListYears.Items.Add(new ListItem(year.Name, year.Id.ToString()));
             }
         }
